@@ -1,0 +1,228 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="4dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_marks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/marks"
+            android:textAlignment="textStart"
+            android:textColor="@color/primaryText"
+            android:textSize="24sp"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_marks_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/marks_info"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_marks"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_marks" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_marks_info" />
+
+        <TextView
+            android:id="@+id/text_marks_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/subject"
+            android:textStyle="bold"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/text_marks_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/type"
+            android:textStyle="bold"
+            card_view:layout_constraintHorizontal_bias="0.454"
+            card_view:layout_constraintLeft_toRightOf="@+id/text_marks_subject"
+            card_view:layout_constraintRight_toLeftOf="@+id/text_marks_mark"
+            card_view:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/text_marks_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/mark"
+            android:textStyle="bold"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_marks_type" />
+
+        <TextView
+            android:id="@+id/marks_subject1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:text=""
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_marks_subject"
+            card_view:layout_constraintTop_toBottomOf="@+id/view6" />
+
+        <TextView
+            android:id="@+id/marks_type1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:text=""
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_marks_type"
+            card_view:layout_constraintTop_toTopOf="@+id/marks_subject1"
+            card_view:layout_constraintBottom_toBottomOf="@+id/marks_subject1"
+            android:layout_marginBottom="0dp"
+            card_view:layout_constraintRight_toLeftOf="@+id/marks_mark1"
+            android:layout_marginEnd="8dp"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+            android:id="@+id/marks_mark1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="0dp"
+            android:text=""
+            card_view:layout_constraintBottom_toBottomOf="@+id/marks_type1"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_marks_mark"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/marks_type1"
+            card_view:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="16dp"
+            card_view:layout_constraintTop_toBottomOf="@+id/marks_type1" />
+
+        <TextView
+            android:id="@+id/marks_subject2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:text=""
+            card_view:layout_constraintLeft_toLeftOf="@+id/marks_subject1"
+            card_view:layout_constraintTop_toBottomOf="@+id/view7" />
+
+        <TextView
+            android:id="@+id/marks_type2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:text=""
+            card_view:layout_constraintBottom_toBottomOf="@+id/marks_subject2"
+            card_view:layout_constraintLeft_toLeftOf="@+id/marks_type1"
+            card_view:layout_constraintTop_toTopOf="@+id/marks_subject2"
+            card_view:layout_constraintRight_toLeftOf="@+id/marks_mark2"
+            android:layout_marginEnd="8dp"
+            card_view:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/marks_mark2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:text=""
+            card_view:layout_constraintBottom_toBottomOf="@+id/marks_type2"
+            card_view:layout_constraintLeft_toLeftOf="@+id/marks_mark1"
+            card_view:layout_constraintTop_toTopOf="@+id/marks_type2"
+            android:layout_marginEnd="16dp"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.523" />
+
+        <View
+            android:id="@+id/view8"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/marks_type2" />
+
+        <Button
+            android:id="@+id/btn_marks_history"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/full_history"
+            android:textColor="@color/colorAccent"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/view8" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,230 @@
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="4dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/text_receivables"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/receivables"
+            android:textAlignment="textStart"
+            android:textColor="@color/primaryText"
+            android:textSize="24sp"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_receivables_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/your_current_receivables_info"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_receivables"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_receivables" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_receivables_info" />
+
+        <TextView
+            android:id="@+id/text_receivables_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/name"
+            android:textStyle="bold"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/text_receivables_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            card_view:layout_constraintTop_toBottomOf="@+id/view"
+            card_view:layout_constraintLeft_toRightOf="@+id/text_receivables_name"
+            android:layout_marginLeft="8dp"
+            card_view:layout_constraintRight_toLeftOf="@+id/text_receivables_amount"
+            android:layout_marginRight="8dp"
+            card_view:layout_constraintHorizontal_bias="0.454" />
+
+        <TextView
+            android:id="@+id/text_receivables_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/amount"
+            android:textStyle="bold"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_receivables_date" />
+
+        <TextView
+            android:id="@+id/receivables_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="16dp"
+            android:text="Czesne"
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_receivables_name"
+            card_view:layout_constraintTop_toBottomOf="@+id/view6" />
+
+        <TextView
+            android:id="@+id/receivables_item1_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:text="20/02/2017"
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_receivables_date"
+            card_view:layout_constraintTop_toTopOf="@+id/receivables_item1"
+            card_view:layout_constraintBottom_toBottomOf="@+id/receivables_item1"
+            android:layout_marginBottom="0dp"
+            card_view:layout_constraintRight_toLeftOf="@+id/receivables_item1_amount"
+            android:layout_marginRight="8dp"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+            android:id="@+id/receivables_item1_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="0dp"
+            android:text="9747.00"
+            card_view:layout_constraintBottom_toBottomOf="@+id/receivables_item1_date"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="@+id/text_receivables_amount"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/receivables_item1_date"
+            card_view:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="16dp"
+            card_view:layout_constraintTop_toBottomOf="@+id/receivables_item1_date" />
+
+        <TextView
+            android:id="@+id/receivables_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="16dp"
+            android:text="Wpisowe"
+            card_view:layout_constraintLeft_toLeftOf="@+id/receivables_item1"
+            card_view:layout_constraintTop_toBottomOf="@+id/view7" />
+
+        <TextView
+            android:id="@+id/receivables_item2_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:text="10/09/2016"
+            card_view:layout_constraintBottom_toBottomOf="@+id/receivables_item2"
+            card_view:layout_constraintLeft_toLeftOf="@+id/receivables_item1_date"
+            card_view:layout_constraintTop_toTopOf="@+id/receivables_item2"
+            card_view:layout_constraintRight_toLeftOf="@+id/receivables_item2_amount"
+            android:layout_marginRight="8dp"
+            card_view:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/receivables_item2_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:text="1000.00"
+            card_view:layout_constraintBottom_toBottomOf="@+id/receivables_item2_date"
+            card_view:layout_constraintLeft_toLeftOf="@+id/receivables_item1_amount"
+            card_view:layout_constraintTop_toTopOf="@+id/receivables_item2_date"
+            android:layout_marginRight="16dp"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.523" />
+
+        <View
+            android:id="@+id/view8"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:listDivider"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/receivables_item2_date" />
+
+        <Button
+            android:id="@+id/btn_receivables_history"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/full_history"
+            android:textColor="@color/colorAccent"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/view8" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
