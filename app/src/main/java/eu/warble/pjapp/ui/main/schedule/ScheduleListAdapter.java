@@ -2,10 +2,12 @@ package eu.warble.pjapp.ui.main.schedule;
 
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -63,6 +65,8 @@ public class ScheduleListAdapter extends BaseAdapter {
             viewHolder.time = (TextView) view.findViewById(R.id.schedule_lessonTime);
             viewHolder.name = (TextView) view.findViewById(R.id.schedule_lessonName);
             viewHolder.location = (TextView) view.findViewById(R.id.schedule_lessonLocation);
+            viewHolder.typeDot = (ImageView) view.findViewById(R.id.schedule_type_dot);
+            viewHolder.leftCornerColor = view.findViewById(R.id.left_corner_color);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
@@ -74,11 +78,15 @@ public class ScheduleListAdapter extends BaseAdapter {
                 + item.getDataZak().substring(11, item.getDataRoz().length());
         String name = item.getKod() + " - " + item.getNazwa();
         String location = context.getString(R.string.building) + " " + item.getBudynek() + ", " + item.getNazwaSali();
+        int color = getTypeColor(item.getTypZajec());
 
-        viewHolder.typZajec.setText(item.getTypZajec());
         viewHolder.time.setText(time);
         viewHolder.name.setText(name);
         viewHolder.location.setText(location);
+        viewHolder.typZajec.setText(item.getTypZajec().toUpperCase());
+        viewHolder.typZajec.setTextColor(color);
+        viewHolder.typeDot.setColorFilter(color, PorterDuff.Mode.SRC);
+        viewHolder.leftCornerColor.getBackground().setColorFilter(color, PorterDuff.Mode.SRC);
 
         return view;
     }
@@ -88,11 +96,26 @@ public class ScheduleListAdapter extends BaseAdapter {
         return lessons.isEmpty();
     }
 
+    private int getTypeColor(String lessonType){
+        switch (lessonType){
+            case "Ćwiczenia":
+                return context.getResources().getColor(R.color.lessonType1);
+            case "Wykład":
+                return context.getResources().getColor(R.color.lessonType2);
+            case "Egzamin":
+                return context.getResources().getColor(R.color.lessonType3);
+            default:
+                return context.getResources().getColor(R.color.lessonType4);
+        }
+    }
+
     private static class ViewHolder {
+        View leftCornerColor;
         TextView typZajec;
         TextView time;
         TextView name;
         TextView location;
+        ImageView typeDot;
         int position;
     }
 }

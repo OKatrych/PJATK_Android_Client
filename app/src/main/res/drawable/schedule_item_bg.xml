@@ -5,9 +5,7 @@
     <item>
         <shape>
             <padding android:left="8dp" android:top="0dp" android:right="0dp" android:bottom="0dp"/>
-            <solid android:color="@color/colorAccent" />
-            <corners android:bottomRightRadius="12dp" android:bottomLeftRadius="0dp"
-                android:topLeftRadius="0dp" android:topRightRadius="0dp"/>
+            <solid android:id="@+id/schedule_item_background" android:color="@color/colorAccent" />
         </shape>
     </item>
     <!-- This is the main color -->
@@ -19,8 +17,6 @@
                 android:right="1dp"
                 android:bottom="1dp"
                 />
-            <corners android:bottomRightRadius="12dp" android:bottomLeftRadius="0dp"
-                android:topLeftRadius="0dp" android:topRightRadius="0dp"/>
         </shape>
     </item>
 </layer-list>
