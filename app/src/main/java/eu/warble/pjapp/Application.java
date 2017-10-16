@@ -3,6 +3,7 @@ package eu.warble.pjapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.indoorway.android.map.sdk.IndoorwayMapSdk;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -21,6 +22,8 @@ public class Application extends android.app.Application{
     public void onCreate() {
         super.onCreate();
         Application.context = getApplicationContext();
+        String trafficApiKey = "e0788b1a-6484-4229-b6cf-4e352bcdc630";
+        IndoorwayMapSdk.init(this, trafficApiKey);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.

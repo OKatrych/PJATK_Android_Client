@@ -100,4 +100,5 @@
     <string name="download_error">Error while downloading</string>
     <string name="download_restriction">You can download only one file at a time</string>
     <string name="search_hint">Search</string>
+    <string name="maps">Maps</string>
 </resources>

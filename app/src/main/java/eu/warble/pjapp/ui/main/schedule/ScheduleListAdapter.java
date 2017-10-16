@@ -61,11 +61,11 @@ public class ScheduleListAdapter extends BaseAdapter {
         if (view == null){
             view = inflater.inflate(R.layout.list_item_schedule, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.typZajec = (TextView) view.findViewById(R.id.schedule_lessonType);
-            viewHolder.time = (TextView) view.findViewById(R.id.schedule_lessonTime);
-            viewHolder.name = (TextView) view.findViewById(R.id.schedule_lessonName);
-            viewHolder.location = (TextView) view.findViewById(R.id.schedule_lessonLocation);
-            viewHolder.typeDot = (ImageView) view.findViewById(R.id.schedule_type_dot);
+            viewHolder.typZajec = view.findViewById(R.id.schedule_lessonType);
+            viewHolder.time = view.findViewById(R.id.schedule_lessonTime);
+            viewHolder.name = view.findViewById(R.id.schedule_lessonName);
+            viewHolder.location = view.findViewById(R.id.schedule_lessonLocation);
+            viewHolder.typeDot = view.findViewById(R.id.schedule_type_dot);
             viewHolder.leftCornerColor = view.findViewById(R.id.left_corner_color);
             view.setTag(viewHolder);
         }else {
@@ -86,7 +86,7 @@ public class ScheduleListAdapter extends BaseAdapter {
         viewHolder.typZajec.setText(item.getTypZajec().toUpperCase());
         viewHolder.typZajec.setTextColor(color);
         viewHolder.typeDot.setColorFilter(color, PorterDuff.Mode.SRC);
-        viewHolder.leftCornerColor.getBackground().setColorFilter(color, PorterDuff.Mode.SRC);
+        viewHolder.leftCornerColor.setBackgroundColor(color);
 
         return view;
     }
@@ -116,6 +116,5 @@ public class ScheduleListAdapter extends BaseAdapter {
         TextView name;
         TextView location;
         ImageView typeDot;
-        int position;
     }
 }

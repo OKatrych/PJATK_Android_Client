@@ -42,12 +42,12 @@
         android:id="@+id/schedule_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
+        android:padding="5dp"
         style="@style/Widget.AppCompat.ListView"
         android:background="@color/secondaryBackground"
         android:divider="@android:color/transparent"
         android:dividerHeight="5dp"
+        android:clipToPadding="false"
         android:headerDividersEnabled="true"
         android:scrollbars="none"/>
 

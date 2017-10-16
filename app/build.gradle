@@ -9,6 +9,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -34,6 +35,7 @@ dependencies {
     implementation 'com.karumi:dexter:4.1.0' //runtime permissions library
     implementation 'solar.blaz:week-date-picker:1.2'
     implementation 'com.jcraft:jsch:0.1.54'
+    implementation 'com.indoorway.android:map:1.4.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.3'
 }

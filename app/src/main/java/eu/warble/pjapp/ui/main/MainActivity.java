@@ -33,6 +33,7 @@ import eu.warble.pjapp.ui.base.BaseActivity;
 import eu.warble.pjapp.ui.base.BaseFragment;
 import eu.warble.pjapp.ui.login.LoginActivity;
 import eu.warble.pjapp.ui.main.ftp.FtpFragment;
+import eu.warble.pjapp.ui.main.map.MapFragment;
 import eu.warble.pjapp.ui.main.schedule.ScheduleFragment;
 import eu.warble.pjapp.ui.main.student_info.StudentInfoFragment;
 
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         fragments = new BaseFragment[]{
                 StudentInfoFragment.newInstance(),
                 ScheduleFragment.newInstance(),
+                MapFragment.newInstance(),
                 FtpFragment.newInstance()
         };
     }
@@ -156,8 +158,10 @@ public class MainActivity extends BaseActivity<MainPresenter> {
                 return 0;
             case R.id.navigation_schedule:
                 return 1;
-            case R.id.navigation_ftp:
+            case R.id.navigation_maps:
                 return 2;
+            case R.id.navigation_ftp:
+                return 3;
             default:
                 return -1;
         }
