@@ -101,4 +101,5 @@
     <string name="download_restriction">You can download only one file at a time</string>
     <string name="search_hint">Search</string>
     <string name="maps">Maps</string>
+    <string name="more">More</string>
 </resources>

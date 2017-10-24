@@ -1,11 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="eu.warble.pjapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Application"
@@ -20,23 +20,22 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.list.ListActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
-        <receiver
-            android:name="eu.warble.pjapp.util.NotificationsManager$NotificationReceiver">
-        </receiver>
+        <receiver android:name=".util.NotificationsManager$NotificationReceiver"></receiver>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -54,5 +53,11 @@
         <meta-data
             android:name="com.samsung.android.icon_container.has_icon_container"
             android:value="true" />
+
+        <activity android:name=".TestActivity"
+            android:theme="@style/AppThemeWithoutActionBar">
+
+        </activity>
     </application>
+
 </manifest>

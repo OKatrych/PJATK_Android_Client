@@ -7,4 +7,5 @@ public class Constants {
     public static final String UNKNOWN_ERROR  = "UNKNOWN_ERROR";
     public static final String EMPTY_ERROR  = "EMPTY_ERROR";
     public static final String CONTEXT_ERROR  = "CONTEXT_ERROR";
+
 }

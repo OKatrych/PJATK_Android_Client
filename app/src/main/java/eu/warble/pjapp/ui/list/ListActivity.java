@@ -21,7 +21,7 @@ public class ListActivity extends BaseActivity<ListPresenter> {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setTheme(R.style.AppThemeWithActionBar);
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_list);
         initActionBar();
         listView = findViewById(R.id.listView);
