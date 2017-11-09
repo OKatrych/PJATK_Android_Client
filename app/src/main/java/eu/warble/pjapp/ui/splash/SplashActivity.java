@@ -6,9 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 
 import eu.warble.pjapp.R;
+import eu.warble.pjapp.ui.MainActivity;
 import eu.warble.pjapp.ui.base.BaseActivity;
 import eu.warble.pjapp.ui.login.LoginActivity;
-import eu.warble.pjapp.ui.main.MainActivity;
 
 public class SplashActivity extends BaseActivity<SplashPresenter> {
 

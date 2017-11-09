@@ -12,9 +12,9 @@ import eu.warble.pjapp.data.local.StudentLocalDataSource;
 import eu.warble.pjapp.data.model.Student;
 import eu.warble.pjapp.data.remote.PjatkAPI;
 import eu.warble.pjapp.ui.base.BaseActivityPresenter;
-import eu.warble.pjapp.ui.main.student_info.fees.PaymentsListAdapter;
-import eu.warble.pjapp.ui.main.student_info.fees.ReceivablesListAdapter;
-import eu.warble.pjapp.ui.main.student_info.marks.MarksListAdapter;
+import eu.warble.pjapp.ui.student_info.fees.PaymentsListAdapter;
+import eu.warble.pjapp.ui.student_info.fees.ReceivablesListAdapter;
+import eu.warble.pjapp.ui.student_info.marks.MarksListAdapter;
 import eu.warble.pjapp.util.AppExecutors;
 import eu.warble.pjapp.util.CredentialsManager;
 

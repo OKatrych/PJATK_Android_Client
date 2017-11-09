@@ -15,4 +15,9 @@
     <color name="lessonType2">#615FF6</color>
     <color name="lessonType3">#66BB6A</color>
     <color name="lessonType4">#F07D5F</color>
+
+    <color name="buildingA">#009688</color>
+    <color name="buildingC">#BA68C8</color>
+    <color name="buildingG">#0091EA</color>
+    <color name="building">#e57373</color>
 </resources>

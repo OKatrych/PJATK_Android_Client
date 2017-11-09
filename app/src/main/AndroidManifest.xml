@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -35,7 +35,7 @@
             android:name=".ui.list.ListActivity"
             android:screenOrientation="portrait" />
 
-        <receiver android:name=".util.NotificationsManager$NotificationReceiver"></receiver>
+        <receiver android:name=".util.NotificationsManager$NotificationReceiver" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -54,10 +54,7 @@
             android:name="com.samsung.android.icon_container.has_icon_container"
             android:value="true" />
 
-        <activity android:name=".TestActivity"
-            android:theme="@style/AppThemeWithoutActionBar">
-
-        </activity>
+        <activity android:name=".ui.map.MapActivity" />
     </application>
 
 </manifest>

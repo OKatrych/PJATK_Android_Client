@@ -1,34 +1,18 @@
 package eu.warble.pjapp.ui.login;
 
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.CompositeMultiplePermissionsListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.multi.SnackbarOnAnyDeniedMultiplePermissionsListener;
-
-import java.util.List;
-
 import eu.warble.pjapp.R;
+import eu.warble.pjapp.ui.MainActivity;
 import eu.warble.pjapp.ui.base.BaseActivity;
-import eu.warble.pjapp.ui.main.MainActivity;
 
 public class LoginActivity extends BaseActivity<LoginPresenter> {
 
