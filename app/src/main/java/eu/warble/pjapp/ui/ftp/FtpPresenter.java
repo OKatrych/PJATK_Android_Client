@@ -39,6 +39,10 @@ public class FtpPresenter extends BaseFragmentPresenter<FtpFragment> {
         }
         FtpManager ftpManager = FtpManager.getInstance(new AppExecutors(),
                 CredentialsManager.getInstance().getCredentials(fragment.context));
+        if (ftpManager.downloading.get()) {
+            fragment.showMessage(fragment.getString(R.string.wait_while_downloading));
+            return;
+        }
         //if we are in main directory
         if ("/".equals(ftpManager.currentDirectory()) && ("..".equals(path) || ".".equals(path)))
             return;
@@ -75,8 +79,8 @@ public class FtpPresenter extends BaseFragmentPresenter<FtpFragment> {
         FtpManager ftpManager = FtpManager.getInstance(new AppExecutors(),
                 CredentialsManager.getInstance().getCredentials(fragment.context));
         if (ftpManager.downloading.get()) {
-            fragment.showMessage(fragment.getString(R.string.download_restriction));
-            return;
+                fragment.showMessage(fragment.getString(R.string.download_restriction));
+                return;
         }
         NotificationsManager notificationManager = NotificationsManager.getInstance();
         NotificationCompat.Builder notification = notificationManager.createDownloadNotification(fragment.context,

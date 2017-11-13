@@ -8,9 +8,9 @@ public class MapListItem {
     private String mapUUID;
     private String buildingUUID;
 
-    public MapListItem(String name, String buildingTag, String mapUUID, String buildingUUID) {
+    public MapListItem(String name, String buildingName, String mapUUID, String buildingUUID) {
         this.name = name;
-        this.buildingTag = buildingTag;
+        this.buildingTag = createBuildingTag(buildingName);
         this.mapUUID = mapUUID;
         this.buildingUUID = buildingUUID;
     }
@@ -29,5 +29,9 @@ public class MapListItem {
 
     public String getBuildingUUID() {
         return buildingUUID;
+    }
+
+    private String createBuildingTag(String buildingName){
+        return buildingName.substring(buildingName.length()-1, buildingName.length());
     }
 }

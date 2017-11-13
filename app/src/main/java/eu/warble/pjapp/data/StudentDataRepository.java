@@ -50,12 +50,13 @@ public class StudentDataRepository implements StudentDataSource{
     }
 
     /**
-     * Gets tasks from cache, local data source (SQLite) or remote data source, whichever is
+     * Gets data from cache, local data source (SharedPrefs) or remote data source, whichever is
      * available first.
      * <p>
      * Note: {@link LoadStudentDataCallback#onDataNotAvailable(String s)} is fired if all data sources fail to
      * get the data.
      */
+    @Override
     public void getStudentData(@NonNull final LoadStudentDataCallback callback) {
 
         // Respond immediately with cache if available and not dirty

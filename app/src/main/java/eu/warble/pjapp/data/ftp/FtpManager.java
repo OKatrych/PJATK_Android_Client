@@ -3,6 +3,7 @@ package eu.warble.pjapp.data.ftp;
 import android.os.Environment;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -61,8 +62,10 @@ public class FtpManager {
                     final Vector<ChannelSftp.LsEntry> list = channelSftp.ls(channelSftp.pwd());
                     executors.mainThread().execute(() -> callback.onFilesListLoaded(list));
                 } catch (SftpException e) {
+                    e.printStackTrace();
                     executors.mainThread().execute(() -> callback.onError(Constants.UNKNOWN_ERROR));
                     Log.e("FtpMgr.loadFilesList", e.toString());
+                    Crashlytics.logException(e);
                 }
             }else{
                 executors.mainThread().execute(() -> callback.onError(Constants.CONNECTION_ERROR));
@@ -76,12 +79,14 @@ public class FtpManager {
                 return channelSftp.pwd();
         } catch (SftpException e) {
             Log.e("FtpMgr.currentDirectory", e.toString());
+            Crashlytics.logException(e);
         }
         return null;
     }
 
     public void downloadFile(String fileName, DownloadFileMonitor monitor){
-        if (!downloading.get()) {
+        boolean connected = (session.isConnected() && channelSftp != null && channelSftp.isConnected()) || connect();
+        if (!downloading.get() && connected) {
             executors.networkIO().execute(() -> {
                 try {
                     File file = new File(Environment.getExternalStoragePublicDirectory(
@@ -114,7 +119,9 @@ public class FtpManager {
                     FileManager.deleteFile(new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_DOWNLOADS), fileName).getAbsolutePath());
                     executors.mainThread().execute(monitor::onFinish);
+                    Crashlytics.logException(ex);
                     Log.e("FtpMgr.downloadFile", ex.toString());
+                    disconnect();
                 }
             });
         }
@@ -139,6 +146,8 @@ public class FtpManager {
                 channelSftp.connect();
         } catch (JSchException e) {
             Log.e("FtpManager.connect()", e.toString());
+            Crashlytics.logException(e);
+            FtpManager.destroyInstance();
             return false;
         }
         return channelSftp.isConnected();

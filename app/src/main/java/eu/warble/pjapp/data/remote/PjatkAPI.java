@@ -2,6 +2,8 @@ package eu.warble.pjapp.data.remote;
 
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -84,6 +86,7 @@ public class PjatkAPI implements StudentDataSource{
                 }
             }catch (IOException ex){
                 appExecutors.mainThread().execute(() -> callback.onDataNotAvailable(Constants.CONNECTION_ERROR));
+                Crashlytics.logException(ex);
             }
         });
     }

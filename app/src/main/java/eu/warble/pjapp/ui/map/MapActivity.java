@@ -7,15 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.indoorway.android.map.sdk.view.IndoorwayMapView;
+import com.indoorway.android.fragments.sdk.map.IndoorwayMapFragment;
+import com.indoorway.android.fragments.sdk.map.MapFragment;
 
 import eu.warble.pjapp.R;
 import eu.warble.pjapp.ui.base.BaseActivity;
 
-public class MapActivity extends BaseActivity<MapPresenter> {
+public class MapActivity extends BaseActivity<MapPresenter> implements IndoorwayMapFragment.OnMapFragmentReadyListener {
 
     private ProgressBar progressBar;
-    private IndoorwayMapView mapView;
+    private View map;
+    MapFragment mapFragment;
 
     @Override
     protected MapPresenter createPresenter() {
@@ -30,18 +32,18 @@ public class MapActivity extends BaseActivity<MapPresenter> {
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_map);
         progressBar = findViewById(R.id.progressBar);
-        mapView = findViewById(R.id.mapView);
+        map = findViewById(R.id.mapFragment);
         initActionBar();
     }
 
-    void loadMap(String buildingUUID, String mapUUID){
-        mapView.setOnMapLoadCompletedListener(indoorwayMap -> presenter.onMapLoadCompleted());
-        mapView.setOnMapLoadFailedListener(() -> presenter.onMapLoadFailed());
-        mapView.loadMap(buildingUUID, mapUUID);
+    @Override
+    public void onMapFragmentReady(MapFragment mapFragment) {
+        this.mapFragment = mapFragment;
+        //presenter.loadMap(mapFragment);
     }
 
     void setLoadingState(boolean state){
-        mapView.setVisibility(state ? View.GONE : View.VISIBLE);
+        map.setVisibility(state ? View.GONE : View.VISIBLE);
         progressBar.setVisibility(state ? View.VISIBLE : View.GONE);
     }
 
@@ -69,5 +71,11 @@ public class MapActivity extends BaseActivity<MapPresenter> {
             default:
                 return false;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
     }
 }

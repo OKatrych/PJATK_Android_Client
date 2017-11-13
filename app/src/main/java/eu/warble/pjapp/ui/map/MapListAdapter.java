@@ -3,12 +3,17 @@ package eu.warble.pjapp.ui.map;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.indoorway.android.common.sdk.model.IndoorwayBuilding;
+import com.indoorway.android.common.sdk.model.IndoorwayObjectId;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import eu.warble.pjapp.R;
 import eu.warble.pjapp.data.model.MapListItem;
@@ -16,22 +21,30 @@ import eu.warble.pjapp.data.model.MapListItem;
 public class MapListAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private SparseArray<MapListItem> maps;
+    private List<IndoorwayBuilding> buildingList;
+    private List<MapListItem> mapList;
 
     MapListAdapter(Context context){
         this.context = context;
         inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        initMaps();
+        buildingList = new ArrayList<>();
+        mapList = new ArrayList<>();
+    }
+
+    public void updateList(List<IndoorwayBuilding> newData) {
+        buildingList.clear();
+        buildingList.addAll(newData);
+        loadMaps();
     }
 
     @Override
     public int getCount() {
-        return maps.size();
+        return mapList.size();
     }
 
     @Override
     public MapListItem getItem(int i) {
-        return maps.get(i);
+        return mapList.get(i);
     }
 
     @Override
@@ -60,16 +73,16 @@ public class MapListAdapter extends BaseAdapter {
         return view;
     }
 
-    private void initMaps(){
-        maps = new SparseArray<>();
-        maps.put(0, new MapListItem(context.getString(R.string.basement), "A", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(1, new MapListItem(context.getString(R.string.ground_floor), "A", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(2, new MapListItem(context.getString(R.string.first_floor), "A", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(3, new MapListItem(context.getString(R.string.second_floor), "A", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(4, new MapListItem(context.getString(R.string.third_floor), "A", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(5, new MapListItem(context.getString(R.string.basement), "C", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(6, new MapListItem(context.getString(R.string.first_floor), "C", "_hfEEWbSOT0", "eFKBL1M2G_g"));
-        maps.put(7, new MapListItem(context.getString(R.string.third_floor), "G", "_hfEEWbSOT0", "eFKBL1M2G_g"));
+    private void loadMaps(){
+        if (mapList != null) mapList = null;
+        mapList = new ArrayList<>();
+        for (IndoorwayBuilding building : buildingList) {
+            for (IndoorwayObjectId map : building.getMaps()){
+                MapListItem item = new MapListItem(
+                        map.getName(), building.getName(), map.getUuid(), building.getUuid());
+                mapList.add(item);
+            }
+        }
     }
 
     private int getBuildingColor(String buildingTag){

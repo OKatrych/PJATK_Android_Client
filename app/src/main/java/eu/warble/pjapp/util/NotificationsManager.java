@@ -1,7 +1,6 @@
 package eu.warble.pjapp.util;
 
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,8 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-
 
 import eu.warble.pjapp.R;
 import eu.warble.pjapp.data.ftp.FtpManager;
@@ -70,7 +67,7 @@ public class NotificationsManager {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
-            builder.setSmallIcon(R.drawable.pja_logo_svg)
+            builder.setSmallIcon(R.drawable.file)
                     .setProgress(0,0, false)
                     .setContentText(fileName)
                     .setOngoing(false);

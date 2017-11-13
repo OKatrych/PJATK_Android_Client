@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import com.crashlytics.android.Crashlytics;
 import com.squareup.leakcanary.RefWatcher;
 
 import eu.warble.pjapp.Application;
@@ -37,12 +38,12 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         setContentView(R.layout.activity_main);
         initFragments();
         initBottomNavigationView();
-
         if (savedInstanceState != null)
             selectedNavigationItem = savedInstanceState.getInt("selectedNavigationItem");
         else
             selectedNavigationItem = R.id.navigation_student;
         selectBottomNavItem(selectedNavigationItem);
+        Crashlytics.log("");
     }
 
     private void initFragments() {
