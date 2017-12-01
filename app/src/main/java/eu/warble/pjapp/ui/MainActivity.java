@@ -1,5 +1,6 @@
 package eu.warble.pjapp.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
@@ -43,7 +45,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         else
             selectedNavigationItem = R.id.navigation_student;
         selectBottomNavItem(selectedNavigationItem);
-        Crashlytics.log("");
     }
 
     private void initFragments() {
@@ -144,5 +145,17 @@ public class MainActivity extends BaseActivity<MainPresenter> {
             default:
                 return -1;
         }
+    }
+
+    public void showApiError(@Nullable String error) {
+        new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setTitle("PJATK API Error")
+                .setMessage(error == null ? "Some problems with PJATK API Server": error)
+                .setNeutralButton("Refresh", (dialogInterface, i) -> {
+                    presenter.checkApiResponseForErrors();
+                    dialogInterface.dismiss();
+                })
+                .show();
     }
 }

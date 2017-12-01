@@ -113,4 +113,5 @@
     <string name="button_allow">Allow</string>
     <string name="button_deny">Deny</string>
     <string name="wait_while_downloading">Please wait till the file is downloaded</string>
+    <string name="no_internet_mode_enabled">No internet mode enabled</string>
 </resources>

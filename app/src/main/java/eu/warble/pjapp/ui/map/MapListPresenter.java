@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.indoorway.android.common.sdk.model.IndoorwayBuilding;
+import com.indoorway.android.common.sdk.model.IndoorwayBuildingParameters;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class MapListPresenter extends BaseFragmentPresenter<MapListFragment> {
         MapsDataRepository repository = MapsDataRepository.getInstance();
         repository.getBuildingsData(new MapsDataSource.LoadBuildingsListCallback() {
             @Override
-            public void onDataLoaded(List<IndoorwayBuilding> indoorwayBuildingsData) {
+            public void onDataLoaded(List<IndoorwayBuildingParameters> indoorwayBuildingsData) {
                 fragment.setLoadingState(false);
                 fragment.updateList(indoorwayBuildingsData);
             }

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.indoorway.android.common.sdk.model.IndoorwayBuilding;
+import com.indoorway.android.common.sdk.model.IndoorwayBuildingParameters;
 import com.indoorway.android.common.sdk.model.IndoorwayObjectId;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import eu.warble.pjapp.data.model.MapListItem;
 public class MapListAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<IndoorwayBuilding> buildingList;
+    private List<IndoorwayBuildingParameters> buildingList;
     private List<MapListItem> mapList;
 
     MapListAdapter(Context context){
@@ -31,7 +31,7 @@ public class MapListAdapter extends BaseAdapter {
         mapList = new ArrayList<>();
     }
 
-    public void updateList(List<IndoorwayBuilding> newData) {
+    public void updateList(List<IndoorwayBuildingParameters> newData) {
         buildingList.clear();
         buildingList.addAll(newData);
         loadMaps();
@@ -76,7 +76,7 @@ public class MapListAdapter extends BaseAdapter {
     private void loadMaps(){
         if (mapList != null) mapList = null;
         mapList = new ArrayList<>();
-        for (IndoorwayBuilding building : buildingList) {
+        for (IndoorwayBuildingParameters building : buildingList) {
             for (IndoorwayObjectId map : building.getMaps()){
                 MapListItem item = new MapListItem(
                         map.getName(), building.getName(), map.getUuid(), building.getUuid());

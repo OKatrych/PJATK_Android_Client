@@ -34,7 +34,7 @@
     <color name="indoorway_map_heading">#0091EA</color>
     <color name="indoorway_map_position_dot_background">#0091EA</color>
     <color name="indoorway_map_position_dot_outline">#eeeeee</color>
-    <color name="indoorway_map_position_uncertainty_background">#000000</color>
+    <color name="indoorway_map_position_uncertainty_background">#0091EA</color>
     <color name="indoorway_map_position_uncertainty_outline">#eeeeee</color>
     <color name="indoorway_map_navigation_dots">#000000</color>
     <color name="indoorway_inaccessible_color">#e0e0e0</color>
