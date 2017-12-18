@@ -19,7 +19,7 @@ import eu.warble.pjapp.util.CredentialsManager.Credentials;
 
 public class LoginPresenter extends BaseActivityPresenter<LoginActivity> {
 
-    public LoginPresenter(LoginActivity activity) {
+    LoginPresenter(LoginActivity activity) {
         super(activity);
     }
 

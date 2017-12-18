@@ -5,20 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.ActionBar;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import eu.warble.pjapp.R;
 import eu.warble.pjapp.ui.MainActivity;
 import eu.warble.pjapp.ui.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity<LoginPresenter> {
 
-    private Button loginBtn;
+    private CircularProgressButton loginBtn;
     private TextInputEditText loginField, passwordField;
-    private ProgressBar progressBar;
 
     @Override
     protected LoginPresenter createPresenter() {
@@ -27,42 +23,42 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
+        setTheme(R.style.AppThemeWithoutActionBar);
         setContentView(R.layout.activity_login);
-        hideActionBar();
         initViews();
-    }
-
-    private void hideActionBar(){
-        ActionBar bar = getSupportActionBar();
-        if (bar != null)
-            bar.hide();
     }
 
     private void initViews() {
         loginBtn = findViewById(R.id.loginBtn);
-        loginField = findViewById(R.id.loginField);
-        passwordField = findViewById(R.id.passwordField);
-        progressBar = findViewById(R.id.loginProgressBar);
+        loginField = findViewById(R.id.login);
+        passwordField = findViewById(R.id.password);
         loginBtn.setOnClickListener(view -> login());
+    }
+
+    void showLoadingProgress(){
+        loginBtn.startAnimation();
+    }
+
+    void hideLoadingProgress(){
+        loginBtn.revertAnimation();
     }
 
     private void login(){
         loginBtn.setEnabled(false);
-        progressBar.setVisibility(View.VISIBLE);
+        showLoadingProgress();
         presenter.login(loginField.getText().toString(), passwordField.getText().toString());
     }
 
     public void showError(int stringResId){
         loginBtn.setEnabled(true);
-        progressBar.setVisibility(View.GONE);
+        hideLoadingProgress();
         Snackbar.make(findViewById(R.id.loginMainLayout), getString(stringResId), Snackbar.LENGTH_SHORT)
                 .show();
     }
 
     public void showError(String error){
         loginBtn.setEnabled(true);
-        progressBar.setVisibility(View.GONE);
+        hideLoadingProgress();
         Snackbar.make(findViewById(R.id.loginMainLayout), error, Snackbar.LENGTH_SHORT)
                 .show();
     }
@@ -72,5 +68,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loginBtn.dispose();
     }
 }
