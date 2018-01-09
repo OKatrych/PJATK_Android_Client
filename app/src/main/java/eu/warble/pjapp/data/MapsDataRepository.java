@@ -1,7 +1,8 @@
 package eu.warble.pjapp.data;
 
 
-import com.indoorway.android.common.sdk.model.IndoorwayBuildingParameters;
+
+import com.indoorway.android.common.sdk.model.IndoorwayBuilding;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class MapsDataRepository implements MapsDataSource{
 
     private static MapsDataRepository INSTANCE = null;
 
-    private List<IndoorwayBuildingParameters> buildingsCachedData;
+    private List<IndoorwayBuilding> buildingsCachedData;
 
     private boolean buildingsCacheIsDirty = false;
 
@@ -56,7 +57,7 @@ public class MapsDataRepository implements MapsDataSource{
     private void getBuildingsDataFromRemoteDataSource(LoadBuildingsListCallback callback) {
         MapsAPI.loadBuildingsList(new LoadBuildingsListCallback() {
             @Override
-            public void onDataLoaded(List<IndoorwayBuildingParameters> indoorwayBuildingsData) {
+            public void onDataLoaded(List<IndoorwayBuilding> indoorwayBuildingsData) {
                 refreshCache(indoorwayBuildingsData);
                 callback.onDataLoaded(indoorwayBuildingsData);
             }
@@ -72,7 +73,7 @@ public class MapsDataRepository implements MapsDataSource{
         buildingsCacheIsDirty = true;
     }
 
-    private void refreshCache(List<IndoorwayBuildingParameters> buildingsData) {
+    private void refreshCache(List<IndoorwayBuilding> buildingsData) {
         buildingsCachedData = null;
         buildingsCachedData = buildingsData;
         buildingsCacheIsDirty = false;

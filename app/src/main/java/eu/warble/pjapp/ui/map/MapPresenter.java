@@ -26,7 +26,6 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
     private String buildingUUID;
     private String mapUUID;
     private MapFragment mapFragment;
-    //private Action1<IndoorwayLocationSdkState> locationListener;
 
     MapPresenter(MapActivity activity) {
         super(activity);
@@ -40,7 +39,6 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
         }
         loadMap(activity.mapFragment);
         registerVisitor();
-        //initLocationListener();
     }
 
     private void loadMap(MapFragment mapFragment) {
@@ -51,39 +49,13 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
             activity.setLoadingState(false);
             mapFragment.startPositioningService();
         });
-        mapFragment.getMapView().loadMap(buildingUUID, mapUUID);
-        /*mapFragment.getPositioningServiceConnection().setOnPositionChangedListener(new OnPositionChangedListener() {
-            @Override
-            public void onPositionChanged(IndoorwayPosition indoorwayPosition) {
-
-            }
-        });*/
+        mapFragment.getMapView().load(buildingUUID, mapUUID);
     }
 
     void setMapParameters(String buildingUUID, String mapUUID){
         this.mapUUID = mapUUID;
         this.buildingUUID = buildingUUID;
     }
-
-    /*private void initLocationListener(){
-        locationListener = indoorwayLocationSdkState -> {
-            Log.i("locationListener", indoorwayLocationSdkState.toString());
-        };
-    }*/
-
-    /*private void registerListener(){
-        IndoorwayLocationSdk.instance()
-                .state()
-                .onChange()
-                .register(locationListener);
-    }
-
-    private void unRegisterListener(){
-        IndoorwayLocationSdk.instance()
-                .state()
-                .onChange()
-                .unregister(locationListener);
-    }*/
 
     void onSaveInstanceState(Bundle outState){
         outState.putString("buildingUUID", buildingUUID);
@@ -95,13 +67,8 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
         activity.showError(activity.getString(R.string.map_loading_error), true);
     }
 
-    void onResume(){
-        //registerListener();
-    }
-
     @Override
     protected void onDestroyActivity() {
-        //unRegisterListener();
         mapFragment.getMapView().setOnMapLoadFailedListener(null);
         mapFragment.getMapView().setOnMapLoadCompletedListener(null);
         super.onDestroyActivity();
@@ -117,10 +84,10 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
             public void onDataLoaded(Student studentData) {
                 Visitor visitor = new Visitor();
                 visitor.setGroupUuid("pj_android_app_users");
-                visitor.setName(String.format("%s %s", studentData.getImie(), studentData.getNazwisko()));
-                visitor.setUuid(studentData.getLogin());
+                visitor.setName(String.format("%s %s %s", studentData.getImie(), studentData.getNazwisko()
+                        , studentData.getLogin()));
                 visitor.setSex(Sex.UNKNOWN);
-                IndoorwaySdk.getInstance().setupVisitor(visitor);
+                IndoorwaySdk.instance().visitor().setup(visitor);
             }
 
             @Override

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.indoorway.android.common.sdk.model.IndoorwayBuildingParameters;
+import com.indoorway.android.common.sdk.model.IndoorwayBuilding;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class MapListFragment extends BaseFragment<MapListPresenter> {
         });
     }
 
-    public void updateList(List<IndoorwayBuildingParameters> newData){
+    public void updateList(List<IndoorwayBuilding> newData) {
         MapListAdapter adapter = (MapListAdapter) mapList.getAdapter();
         adapter.updateList(newData);
     }

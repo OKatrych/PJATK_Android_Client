@@ -20,7 +20,7 @@ allprojects {
     repositories {
         maven { url 'https://maven.google.com' }
         jcenter()
-        maven { url 'https://indoorway.com/sdk/android/repo/maven/' }
+        maven { url 'https://repository.indoorway.com/artifactory/android' }
     }
 }
 

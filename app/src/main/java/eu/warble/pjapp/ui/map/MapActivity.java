@@ -76,6 +76,5 @@ public class MapActivity extends BaseActivity<MapPresenter> implements Indoorway
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume();
     }
 }
