@@ -161,8 +161,6 @@ public class FtpManager {
     }
 
     private void disconnect(){
-        if (channelSftp.isConnected())
-            channelSftp.disconnect();
         if (session.isConnected())
             session.disconnect();
     }

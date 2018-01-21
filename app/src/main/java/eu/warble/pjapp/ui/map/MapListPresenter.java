@@ -20,7 +20,7 @@ import eu.warble.pjapp.util.NetworkHelper;
 public class MapListPresenter extends BaseFragmentPresenter<MapListFragment> {
 
 
-    public MapListPresenter(MapListFragment fragment) {
+    MapListPresenter(MapListFragment fragment) {
         super(fragment);
     }
 

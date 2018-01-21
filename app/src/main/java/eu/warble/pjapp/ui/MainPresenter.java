@@ -16,14 +16,21 @@ import eu.warble.pjapp.util.Tools;
 
 public class MainPresenter extends BaseActivityPresenter<MainActivity> {
 
-    public MainPresenter(MainActivity activity) {
+    //if guestMode enabled, some fragments are inaccessible
+    private boolean guestMode;
+
+    MainPresenter(MainActivity activity) {
         super(activity);
     }
 
     @Override
     protected void initPresenter(@Nullable Bundle savedInstanceState) {
-        checkNoInternetMode();
-        checkApiResponseForErrors();
+        guestMode = activity.getIntent().getBooleanExtra("guestMode", false);
+        activity.selectNavigationItem(guestMode ? R.id.navigation_maps : activity.selectedNavigationItem);
+    }
+
+    boolean checkFragmentAccessible(int fragmentID) {
+        return !guestMode || fragmentID == R.id.navigation_maps;
     }
 
     void checkApiResponseForErrors() {
@@ -42,13 +49,6 @@ public class MainPresenter extends BaseActivityPresenter<MainActivity> {
                 activity.showApiError(error);
             }
         });
-    }
-
-    private void checkNoInternetMode() {
-        //if noInternetMode enabled
-        if (!activity.getIntent().getBooleanExtra("internet", true)){
-            activity.showToast(activity.getString(R.string.no_internet_mode_enabled));
-        }
     }
 
     void logOut() {

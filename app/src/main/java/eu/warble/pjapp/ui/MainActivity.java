@@ -24,7 +24,8 @@ import eu.warble.pjapp.ui.student_info.StudentInfoFragment;
 
 public class MainActivity extends BaseActivity<MainPresenter> {
 
-    private int selectedNavigationItem;
+    private BottomNavigationView navigationView;
+    int selectedNavigationItem;
     private BaseFragment[] fragments;
 
     @Override
@@ -42,7 +43,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
             selectedNavigationItem = savedInstanceState.getInt("selectedNavigationItem");
         else
             selectedNavigationItem = R.id.navigation_student;
-        selectBottomNavItem(selectedNavigationItem);
     }
 
     private void initFragments() {
@@ -55,11 +55,20 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     }
 
     private void initBottomNavigationView() {
-        BottomNavigationView navigationView = findViewById(R.id.bottomNavigationView);
-        navigationView.setOnNavigationItemSelectedListener(l -> selectBottomNavItem(l.getItemId()));
+        navigationView = findViewById(R.id.bottomNavigationView);
+        navigationView.setOnNavigationItemSelectedListener(l -> {
+            if (presenter.checkFragmentAccessible(l.getItemId()))
+                return changeFragments(l.getItemId());
+            startLoginActivity();
+            return false;
+        });
     }
 
-    private boolean selectBottomNavItem(int itemId){
+    void selectNavigationItem(int itemId){
+        navigationView.setSelectedItemId(itemId);
+    }
+
+    private boolean changeFragments(int itemId){
         int position = getPosition(itemId);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -99,16 +108,10 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
     public void startLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-
         finish();
     }
 

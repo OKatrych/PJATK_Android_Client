@@ -53,7 +53,6 @@ public class SplashPresenter extends BaseActivityPresenter<SplashActivity> {
                     switch (error){
                         case Constants.CONNECTION_ERROR:
                             activity.showConnectionError();
-                            //activity.startMainActivityWithNoInternetMode();
                             break;
                         case Constants.CREDENTIALS_ERROR:
                             StudentDataRepository.destroyInstance();

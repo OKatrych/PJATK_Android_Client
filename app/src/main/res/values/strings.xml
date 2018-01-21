@@ -114,4 +114,7 @@
     <string name="button_deny">Deny</string>
     <string name="wait_while_downloading">Please wait till the file is downloaded</string>
     <string name="no_internet_mode_enabled">No internet mode enabled</string>
+    <string name="skip">Skip</string>
+    <string name="login_as_guest">Login as guest</string>
+    <string name="or">OR</string>
 </resources>
