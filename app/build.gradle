@@ -8,8 +8,8 @@ android {
         applicationId "eu.warble.pjapp"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 3
-        versionName "Beta 3"
+        versionCode 4
+        versionName "Beta 4"
         multiDexEnabled true
     }
     buildTypes {

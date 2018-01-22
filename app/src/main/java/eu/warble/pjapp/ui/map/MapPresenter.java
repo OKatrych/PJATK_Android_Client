@@ -76,8 +76,17 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
 
     private void registerVisitor(){
         AppExecutors executors = new AppExecutors();
+        CredentialsManager.Credentials credentials = CredentialsManager.getInstance().getCredentials(activity);
+        if (credentials == null){
+            Visitor visitor = new Visitor();
+            visitor.setGroupUuid("pj_android_app_users");
+            visitor.setName("Guest mode");
+            visitor.setSex(Sex.UNKNOWN);
+            IndoorwaySdk.instance().visitor().setup(visitor);
+            return;
+        }
         StudentDataRepository.getInstance(
-                PjatkAPI.getInstance(CredentialsManager.getInstance().getCredentials(activity), executors),
+                PjatkAPI.getInstance(credentials, executors),
                 StudentLocalDataSource.getInstance(executors))
                 .getStudentData(new StudentDataSource.LoadStudentDataCallback() {
             @Override
