@@ -3,14 +3,14 @@ package eu.warble.pjapp.ui.map;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.indoorway.android.common.sdk.IndoorwaySdk;
-import com.indoorway.android.common.sdk.listeners.position.OnPositionChangedListener;
-import com.indoorway.android.common.sdk.model.IndoorwayPosition;
+import com.indoorway.android.common.sdk.model.IndoorwayObjectParameters;
 import com.indoorway.android.common.sdk.model.Sex;
 import com.indoorway.android.common.sdk.model.Visitor;
 import com.indoorway.android.fragments.sdk.map.MapFragment;
+import com.indoorway.android.map.sdk.listeners.OnObjectSelectedListener;
+
 import eu.warble.pjapp.R;
 import eu.warble.pjapp.data.StudentDataRepository;
 import eu.warble.pjapp.data.StudentDataSource;
@@ -26,6 +26,7 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
     private String buildingUUID;
     private String mapUUID;
     private MapFragment mapFragment;
+    private OnObjectSelectedListener objectSelectedListener;
 
     MapPresenter(MapActivity activity) {
         super(activity);
@@ -37,6 +38,7 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
             buildingUUID = savedInstanceState.getString("buildingUUID");
             mapUUID = savedInstanceState.getString("mapUUID");
         }
+        objectSelectedListener = initObjSelectedListener();
         loadMap(activity.mapFragment);
         registerVisitor();
     }
@@ -49,6 +51,7 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
             activity.setLoadingState(false);
             mapFragment.startPositioningService();
         });
+        mapFragment.getMapView().getSelection().setOnObjectSelectedListener(objectSelectedListener);
         mapFragment.getMapView().load(buildingUUID, mapUUID);
     }
 
@@ -71,6 +74,7 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
     protected void onDestroyActivity() {
         mapFragment.getMapView().setOnMapLoadFailedListener(null);
         mapFragment.getMapView().setOnMapLoadCompletedListener(null);
+        mapFragment.getMapView().getSelection().setOnObjectSelectedListener(null);
         super.onDestroyActivity();
     }
 
@@ -104,5 +108,24 @@ public class MapPresenter extends BaseActivityPresenter<MapActivity>{
                 activity.showError(error, false);
             }
         });
+    }
+
+    private OnObjectSelectedListener initObjSelectedListener(){
+        return new OnObjectSelectedListener() {
+            @Override
+            public boolean canObjectBeSelected(IndoorwayObjectParameters parameters) {
+                return !"inaccessible".equals(parameters.getType());
+            }
+
+            @Override
+            public void onObjectSelected(IndoorwayObjectParameters parameters) {
+                mapFragment.getMapView().getNavigation().start(parameters.getId());
+            }
+
+            @Override
+            public void onSelectionCleared() {
+                mapFragment.getMapView().getNavigation().stop();
+            }
+        };
     }
 }

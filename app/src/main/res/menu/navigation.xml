@@ -21,8 +21,8 @@
         android:icon="@drawable/network_download"
         android:title="FTP(Beta)" />
 
-    <!--<item
+    <item
         android:id="@+id/navigation_more"
         android:icon="@drawable/more"
-        android:title="@string/more" />-->
+        android:title="@string/more" />
 </menu>

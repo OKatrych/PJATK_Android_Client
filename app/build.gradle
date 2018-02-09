@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.indoorway.android:location:2.0.4'
     implementation 'com.indoorway.android:fragments:2.0.4'
     implementation 'com.github.hotchemi:permissionsdispatcher:3.0.1'
+    implementation 'com.ncapdevi:frag-nav:2.4.0'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.3'
