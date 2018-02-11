@@ -11,6 +11,11 @@ android {
         versionCode 4
         versionName "Beta 4"
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
     }
     buildTypes {
         release {
@@ -26,6 +31,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.github.Warble98:Getter:-SNAPSHOT'
+
     implementation 'com.android.support:support-v4:27.0.2'
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support:design:27.0.2'
@@ -41,9 +48,9 @@ dependencies {
     implementation 'com.indoorway.android:map:2.0.4'
     implementation 'com.indoorway.android:location:2.0.4'
     implementation 'com.indoorway.android:fragments:2.0.4'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     implementation 'com.github.hotchemi:permissionsdispatcher:3.0.1'
     implementation 'com.ncapdevi:frag-nav:2.4.0'
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.3'
     implementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {

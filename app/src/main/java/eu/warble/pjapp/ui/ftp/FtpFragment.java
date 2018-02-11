@@ -1,6 +1,5 @@
 package eu.warble.pjapp.ui.ftp;
 
-
 import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,10 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.jcraft.jsch.ChannelSftp;
 
-import java.util.Vector;
+import java.util.List;
 
+
+import eu.warble.getter.model.GetterFile;
 import eu.warble.pjapp.R;
 import eu.warble.pjapp.ui.base.BaseFragment;
 import permissions.dispatcher.NeedsPermission;
@@ -30,17 +30,15 @@ import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
 
-@RuntimePermissions
-public class FtpFragment extends BaseFragment<FtpPresenter> implements SearchView.OnQueryTextListener{
+public class FtpFragment extends BaseFragment<FtpPresenter> implements SearchView.OnQueryTextListener {
 
     private ListView listView;
     private LinearLayout loadingScreen;
     private SearchView searchView;
     private MenuItem searchItem;
 
-    public static FtpFragment newInstance(){
+    public static FtpFragment newInstance() {
         FtpFragment ftpFragment = new FtpFragment();
         ftpFragment.tag = "fragment_ftp";
         return ftpFragment;
@@ -52,52 +50,57 @@ public class FtpFragment extends BaseFragment<FtpPresenter> implements SearchVie
     }
 
     @Override
-    protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected View initView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState
+    ) {
         View view = inflater.inflate(R.layout.fragment_ftp, container, false);
         setHasOptionsMenu(true);
         initViews(view);
         return view;
     }
 
-    private void initViews(View view){
+    private void initViews(View view) {
         loadingScreen = view.findViewById(R.id.loading_screen);
         listView = view.findViewById(R.id.ftpListView);
         listView.setAdapter(new FtpListAdapter(context));
         listView.setOnItemClickListener((parent, view1, position, id) -> {
-            ChannelSftp.LsEntry item = (ChannelSftp.LsEntry) listView.getAdapter().getItem(position);
-            if(item.getAttrs().isDir()){
-                presenter.loadDirectory(item.getFilename());
-                if(!searchView.isIconified()){
+            GetterFile item = (GetterFile) listView.getAdapter().getItem(position);
+            if (item.isDirectory()) {
+                presenter.loadDirectory(item.getName());
+                if (!searchView.isIconified()) {
                     searchItem.collapseActionView();
                 }
-            }else {
-                FtpFragmentPermissionsDispatcher.downloadFileWithPermissionCheck(FtpFragment.this, item.getFilename());
+            } else {
+                FtpFragmentPermissionsDispatcher.downloadFileWithPermissionCheck(FtpFragment.this, item);
             }
         });
     }
 
-    public void showLoadingScreen(){
+    public void showLoadingScreen() {
         loadingScreen.setVisibility(View.VISIBLE);
     }
 
-    public void hideLoadingScreen(){
+    public void hideLoadingScreen() {
         loadingScreen.setVisibility(View.GONE);
     }
 
-    public void updateList(Vector<ChannelSftp.LsEntry> newData){
+    public void updateList(List<GetterFile> newData) {
         FtpListAdapter adapter = (FtpListAdapter) listView.getAdapter();
         adapter.updateList(newData);
     }
 
-    public void showMessage(String message){
+    public void showMessage(String message) {
         FragmentActivity activity = getActivity();
-        if (activity != null)
+        if (activity != null) {
             Snackbar.make(activity.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    void downloadFile(String fileName){
-        presenter.downloadFile(fileName);
+    void downloadFile(GetterFile file) {
+        presenter.downloadFile(file);
     }
 
     @OnShowRationale({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
@@ -121,7 +124,10 @@ public class FtpFragment extends BaseFragment<FtpPresenter> implements SearchVie
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(
+            Menu menu,
+            MenuInflater inflater
+    ) {
         inflater.inflate(R.menu.toolbar, menu);
         searchItem = menu.findItem(R.id.action_search);
         searchItem.setEnabled(true);
@@ -137,13 +143,18 @@ public class FtpFragment extends BaseFragment<FtpPresenter> implements SearchVie
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if (loadingScreen.getVisibility() == View.GONE)
-            ((FtpListAdapter)listView.getAdapter()).getFilter().filter(newText);
+        if (loadingScreen.getVisibility() == View.GONE) {
+            ((FtpListAdapter) listView.getAdapter()).getFilter().filter(newText);
+        }
         return true;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         FtpFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }

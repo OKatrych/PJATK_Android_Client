@@ -14,14 +14,17 @@ import android.widget.TextView;
 
 import com.jcraft.jsch.ChannelSftp;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
+import eu.warble.getter.model.GetterFile;
 import eu.warble.pjapp.R;
 
 public class FtpListAdapter extends BaseAdapter implements Filterable{
 
-    private Vector<ChannelSftp.LsEntry> allFiles;
-    private Vector<ChannelSftp.LsEntry> displayedFiles;
+    private List<GetterFile> allFiles;
+    private List<GetterFile> displayedFiles;
     private LayoutInflater inflater;
     private Filter filter;
 
@@ -32,7 +35,7 @@ public class FtpListAdapter extends BaseAdapter implements Filterable{
         initFilter();
     }
 
-    public void updateList(Vector<ChannelSftp.LsEntry> update){
+    public void updateList(List<GetterFile> update){
         allFiles.clear();
         displayedFiles.clear();
         if (!update.isEmpty()){
@@ -49,7 +52,7 @@ public class FtpListAdapter extends BaseAdapter implements Filterable{
     }
 
     @Override
-    public ChannelSftp.LsEntry getItem(int i) {
+    public GetterFile getItem(int i) {
         return displayedFiles.get(i);
     }
 
@@ -72,13 +75,13 @@ public class FtpListAdapter extends BaseAdapter implements Filterable{
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ChannelSftp.LsEntry file = getItem(i);
-        if (file.getAttrs().isDir())
+        GetterFile file = getItem(i);
+        if (file.isDirectory())
             viewHolder.icon.setImageResource(R.drawable.folder);
         else
-            setFileIcon(file.getFilename(), viewHolder.icon);
-        viewHolder.fileName.setText(file.getFilename());
-        viewHolder.date.setText(file.getAttrs().getMtimeString());
+            setFileIcon(file.getName(), viewHolder.icon);
+        viewHolder.fileName.setText(file.getName());
+        viewHolder.date.setText(file.getLsEntry().getAttrs().getMtimeString());
         viewHolder.position = i;
 
         return view;
@@ -94,14 +97,14 @@ public class FtpListAdapter extends BaseAdapter implements Filterable{
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 FilterResults results = new FilterResults();
-                Vector<ChannelSftp.LsEntry> tmpFiles = new Vector<>(allFiles.capacity());
+                List<GetterFile> tmpFiles = new LinkedList<>();
                 if (charSequence == null || charSequence.length() == 0) {
                     results.count = allFiles.size();
                     results.values = allFiles;
                 }else {
                     charSequence = charSequence.toString().toLowerCase();
-                    for (ChannelSftp.LsEntry file : allFiles){
-                        if (file.getFilename().toLowerCase().startsWith(charSequence.toString())){
+                    for (GetterFile file : allFiles){
+                        if (file.getName().toLowerCase().startsWith(charSequence.toString())){
                             tmpFiles.add(file);
                         }
                     }
@@ -114,7 +117,7 @@ public class FtpListAdapter extends BaseAdapter implements Filterable{
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 displayedFiles.clear();
-                displayedFiles.addAll((Vector<ChannelSftp.LsEntry>) filterResults.values);
+                displayedFiles.addAll((List<GetterFile>) filterResults.values);
                 notifyDataSetChanged();
             }
         };

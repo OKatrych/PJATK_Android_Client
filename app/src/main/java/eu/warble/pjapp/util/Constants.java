@@ -8,4 +8,6 @@ public class Constants {
     public static final String EMPTY_ERROR  = "EMPTY_ERROR";
     public static final String CONTEXT_ERROR  = "CONTEXT_ERROR";
 
+    public static final String SFTP_SERVER_URL = "sftp.pjwstk.edu.pl";
+
 }

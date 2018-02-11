@@ -152,9 +152,7 @@ public class MainActivity extends BaseActivity<MainPresenter>
 
     @Override
     public void onBackPressed() {
-        if (!fragNavController.popFragment()) {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 
     private int getPosition(int fragmentId) {
