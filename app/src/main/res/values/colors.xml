@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#c1c1c1</color>
+    <color name="colorAccent">#f44336</color>
+    <color name="rippleColor">#ffcdd2</color>
+    <color name="iconsColor">#4d4d4d</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#757575</color>
+    <color name="dividerColor">#bdbdbd</color>
+    <color name="secondaryBackground">#FAFAFA</color>
+    <color name="white">#ffffff</color>
+    <color name="almost_transparent">#14000000</color>
+
+    <color name="lessonType1">#ED6383</color>
+    <color name="lessonType2">#615FF6</color>
+    <color name="lessonType3">#66BB6A</color>
+    <color name="lessonType4">#F07D5F</color>
+
+    <color name="buildingA">#009688</color>
+    <color name="buildingC">#BA68C8</color>
+    <color name="buildingG">#0091EA</color>
+    <color name="building">#e57373</color>
+
+    <!-- indoorway -->
+    <color name="indoorway_map_text_color">@color/primaryText</color>
+    <color name="indoorway_map_text_shadow">@color/secondaryText</color>
+    <color name="indoorway_map_outdoor_background">@color/secondaryBackground</color>
+    <color name="indoorway_map_indoor_background">#bdbdbd</color>
+    <color name="indoorway_map_outline">#eeeeee</color>
+    <color name="indoorway_map_default_room_background">#e0e0e0</color>
+    <color name="indoorway_map_default_room_outline">#eeeeee</color>
+    <color name="indoorway_map_selected_room_background">#0091EA</color>
+    <color name="indoorway_map_selected_room_outline">#eeeeee</color>
+    <color name="indoorway_map_heading">#0091EA</color>
+    <color name="indoorway_map_position_dot_background">#0091EA</color>
+    <color name="indoorway_map_position_dot_outline">#eeeeee</color>
+    <color name="indoorway_map_position_uncertainty_background">#3c0091ea</color>
+    <color name="indoorway_map_position_uncertainty_outline">#eeeeee</color>
+    <color name="indoorway_map_navigation_dots">#000000</color>
+    <color name="indoorway_inaccessible_color">#e0e0e0</color>
+</resources>

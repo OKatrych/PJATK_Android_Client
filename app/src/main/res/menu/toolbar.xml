@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/magnify"
+        android:orderInCategory="2"
+        android:visible="false"
+        android:enabled="false"
+        android:title="@string/search_hint"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+    <!--<item
+        android:id="@+id/toolbar_about"
+        android:icon="@drawable/dots_vertical"
+        app:showAsAction="never"
+        android:title="@string/about"/>-->
+    <item
+        android:id="@+id/toolbar_logOut"
+        app:showAsAction="never"
+        android:title="@string/logout"/>
+</menu>
