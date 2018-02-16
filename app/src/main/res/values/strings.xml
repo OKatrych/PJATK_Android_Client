@@ -85,7 +85,6 @@
     <string name="average">Average</string>
     <string name="average_marks_info">Information about your average marks</string>
 
-
     <string name="credentials_error">Wrong login or password</string>
 
     <string name="all_permissions_denied_feedback">Please enable permissions from the app settings.</string>
@@ -117,4 +116,6 @@
     <string name="skip">Skip</string>
     <string name="login_as_guest">Login as guest</string>
     <string name="or">OR</string>
+    <string name="login_login_field_blank">Login cannot be blank</string>
+    <string name="login_password_field_blank">Password cannot be blank</string>
 </resources>

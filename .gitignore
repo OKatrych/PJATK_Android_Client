@@ -15,13 +15,7 @@ out/
 
 # Gradle files
 .gradle/
-gradle/
 build/
-gradlew
-gradle.properties
-gradlew.bat
-local.properties
-
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -38,9 +32,23 @@ proguard/
 # Android Studio captures folder
 captures/
 
-# Intellij
+# IntelliJ
 *.iml
-.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
+
+# User-specific configurations
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
 
 # Keystore files
 *.jks
@@ -56,5 +64,18 @@ freeline.py
 freeline/
 freeline_project_description.json
 
-#MacOS
-*.DS_Store
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

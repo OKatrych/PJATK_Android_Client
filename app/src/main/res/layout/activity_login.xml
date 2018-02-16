@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.constraint.ConstraintLayout android:id="@+id/loginMainLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/loginMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true">
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/pja_logo"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
@@ -37,11 +36,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
+        android:labelFor="@id/login"
+        android:textColorHint="@color/secondaryText"
         app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColorHint="@color/secondaryText"
-        android:labelFor="@id/login">
+        app:layout_constraintStart_toStartOf="parent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/login"
@@ -49,12 +48,12 @@
             android:layout_height="wrap_content"
             android:drawablePadding="16dp"
             android:drawableStart="@drawable/account_outline"
-            android:inputType="text"
-            android:paddingBottom="20dp"
-            android:maxLines="1"
             android:hint="@string/login"
-            android:textColorHint="@color/secondaryText"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingBottom="20dp"
             android:textColor="@color/primaryText"
+            android:textColorHint="@color/secondaryText"
             app:backgroundTint="@color/dividerColor" />
     </android.support.design.widget.TextInputLayout>
 
@@ -66,12 +65,13 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:labelFor="@id/password"
         android:textColorHint="@color/secondaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:labelFor="@id/password">
+        app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/password"
@@ -79,12 +79,12 @@
             android:layout_height="wrap_content"
             android:drawablePadding="16dp"
             android:drawableStart="@drawable/lock_outline"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:paddingBottom="20dp"
-            android:hint="@string/password"
-            android:textColorHint="@color/secondaryText"
             android:textColor="@color/primaryText"
+            android:textColorHint="@color/secondaryText"
             app:backgroundTint="@color/dividerColor" />
     </android.support.design.widget.TextInputLayout>
 
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/mountains" />
 
-    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+    <Button
         android:id="@+id/loginBtn"
         style="@style/AppTheme.Button"
         android:layout_width="0dp"
@@ -108,8 +108,7 @@
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/passwordInputLayout"
         app:layout_constraintStart_toStartOf="@+id/passwordInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
-        app:spinning_bar_color="@color/white" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout" />
 
     <Button
         android:id="@+id/loginGuestBtn"
@@ -117,7 +116,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rouded_border"
+        android:background="@drawable/button_transparent_with_border_selector"
         android:text="@string/login_as_guest"
         app:layout_constraintEnd_toEndOf="@+id/loginBtn"
         app:layout_constraintStart_toStartOf="@+id/loginBtn"
@@ -129,11 +128,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/or"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/primaryText"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/loginBtn"
         app:layout_constraintStart_toStartOf="@+id/loginBtn"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
-
 
 </android.support.constraint.ConstraintLayout>

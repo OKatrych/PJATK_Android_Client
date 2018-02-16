@@ -10,6 +10,7 @@
     <color name="dividerColor">#bdbdbd</color>
     <color name="secondaryBackground">#FAFAFA</color>
     <color name="white">#ffffff</color>
+    <color name="almost_transparent">#14000000</color>
 
     <color name="lessonType1">#ED6383</color>
     <color name="lessonType2">#615FF6</color>
