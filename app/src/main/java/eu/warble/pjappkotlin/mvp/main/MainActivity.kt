@@ -98,17 +98,17 @@ class MainActivity : BaseActivity(),
     override fun getRootFragment(index: Int): Fragment {
         return when (index) {
             INDEX_STUDENT -> StudentInfoFragment.newInstance()
-            INDEX_SCHEDULE -> ScheduleFragment.newInstance()
-            INDEX_MAP -> MapListFragment.newInstance()
-            INDEX_FTP -> FtpFragment.newInstance()
-            INDEX_MORE -> MoreFragment.newInstance()
+            INDEX_SCHEDULE -> StudentInfoFragment.newInstance()
+            INDEX_MAP -> StudentInfoFragment.newInstance()
+            INDEX_FTP -> StudentInfoFragment.newInstance()
+            INDEX_MORE -> StudentInfoFragment.newInstance()
             else -> throw IllegalStateException("Need to send an index that we know")
         }
     }
 
     private fun updateActionBar(index: Int) {
         when (index) {
-            INDEX_STUDENT or INDEX_SCHEDULE -> supportActionBar?.elevation = 0f
+            INDEX_STUDENT, INDEX_SCHEDULE -> supportActionBar?.elevation = 0f
             else -> supportActionBar?.elevation = 14f
         }
     }

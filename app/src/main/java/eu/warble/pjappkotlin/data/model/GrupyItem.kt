@@ -5,4 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class GrupyItem(
         @SerializedName("Nazwa")
         val nazwa: String?
-)
+) {
+    override fun toString(): String {
+        return "$nazwa"
+    }
+}

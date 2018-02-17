@@ -48,5 +48,4 @@ class ReceivablesListAdapter(
             totalInstalment.text = payment?.liczbaRat.toString()
         }
     }
-
 }

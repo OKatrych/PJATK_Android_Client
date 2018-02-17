@@ -6,6 +6,7 @@ import eu.warble.pjappkotlin.data.StudentDataSource
 import eu.warble.pjappkotlin.data.model.Student
 import eu.warble.pjappkotlin.mvp.studentinfo.fees.adapter.PaymentsListAdapter
 import eu.warble.pjappkotlin.mvp.studentinfo.fees.adapter.ReceivablesListAdapter
+import eu.warble.pjappkotlin.mvp.studentinfo.marks.MarksListAdapter
 import eu.warble.pjappkotlin.utils.Constants.ListActivityAdapterType.MARKS
 import eu.warble.pjappkotlin.utils.Constants.ListActivityAdapterType.RECEIVABLE
 import eu.warble.pjappkotlin.utils.Constants.ListActivityAdapterType.PAYMENT
