@@ -1,5 +1,7 @@
 package eu.warble.pjappkotlin.utils
 
+import org.threeten.bp.format.DateTimeFormatter
+
 
 object Constants {
     val PJAPP_PREFS = "Pjapp-prefs"
@@ -20,6 +22,8 @@ object Constants {
             "https://ws.pjwstk.edu.pl/test/Service.svc/XmlService/GetStudentSchedule"
     val API_CHECK_CREDENTIALS =
             "https://ws.pjwstk.edu.pl/test/Service.svc/XmlService/tester"
+
+    val API_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-dd-MM")
 
     object ListActivityAdapterType {
         val PAYMENT = "PAYMENT"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/main_appBar"
@@ -16,19 +16,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textSize="18sp"
-            android:textColor="@color/primaryText"
             android:background="@color/colorPrimary"
-            app:wdp_labelTextSize="12sp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/primaryText"
+            android:textSize="18sp"
+            app:wdp_dayBackground="@drawable/date_picker_day_bg"
+            app:wdp_firstDayOfWeek="monday"
+            app:wdp_indicatorDrawable="@drawable/date_picker_indicator"
             app:wdp_labelPadding="5dp"
             app:wdp_labelTextColor="@color/primaryText"
-            app:wdp_dayBackground="@drawable/date_picker_day_bg"
-            app:wdp_indicatorDrawable="@drawable/date_picker_indicator"
-            app:wdp_firstDayOfWeek="monday"/>
+            app:wdp_labelTextSize="12sp" />
     </android.support.design.widget.AppBarLayout>
 
+    <FrameLayout
+        android:id="@+id/loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/empty_lessons_text"
@@ -38,17 +50,13 @@
         android:text="@string/no_lessons"
         android:visibility="gone" />
 
-    <ListView
-        android:id="@+id/schedule_listView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/schedule_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
-        style="@style/Widget.AppCompat.ListView"
         android:background="@color/secondaryBackground"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5dp"
         android:clipToPadding="false"
-        android:headerDividersEnabled="true"
-        android:scrollbars="none"/>
+        android:padding="5dp"
+        android:scrollbars="none" />
 
 </LinearLayout>
