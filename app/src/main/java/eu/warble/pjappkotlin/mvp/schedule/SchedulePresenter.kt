@@ -2,10 +2,13 @@ package eu.warble.pjappkotlin.mvp.schedule
 
 import android.content.Context
 import eu.warble.pjappkotlin.data.ScheduleDataRepository
+import eu.warble.pjappkotlin.data.ScheduleDataSource
+import eu.warble.pjappkotlin.data.model.ZajeciaItem
+import eu.warble.pjappkotlin.utils.ScheduleManager
 import org.threeten.bp.LocalDate
 
 class SchedulePresenter(
-        private val scheduleDataRepository: ScheduleDataRepository,
+        private val scheduleDataRepository: ScheduleDataRepository?,
         val view: ScheduleContract.View,
         private val appContext: Context
 ) : ScheduleContract.Presenter {
@@ -21,11 +24,28 @@ class SchedulePresenter(
 
     override fun loadWeekScheduleForSelectedDay(day: LocalDate) {
         view.showLoadingScreen(true)
+        val from = day.minusDays(day.dayOfWeek.value - 1L)
+        val to = day.plusDays(7L - day.dayOfWeek.value)
+        scheduleDataRepository?.getScheduleData(appContext, from, to, object : ScheduleDataSource.LoadScheduleDataCallback {
+            override fun onDataLoaded(scheduleData: List<ZajeciaItem>) {
+                view.showLoadingScreen(false)
+                showSchedule(day, from, to, scheduleData)
+            }
 
+            override fun onDataNotAvailable(error: String) {
+                view.showLoadingScreen(false)
+                view.showError(error)
+            }
+        })
     }
 
-    override fun refresh() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun showSchedule(selectedDay: LocalDate, from: LocalDate, to: LocalDate, scheduleData: List<ZajeciaItem>) {
+        val datePicker = view.datePicker
+        val scheduleManager = ScheduleManager(scheduleData)
+        datePicker.setLimits(from, to)
+        datePicker.selectDay(selectedDay)
+        datePicker.setOnDateSelectedListener {
+            view.updateList(scheduleManager.getLessonsForDate(it))
+        }
     }
-
 }

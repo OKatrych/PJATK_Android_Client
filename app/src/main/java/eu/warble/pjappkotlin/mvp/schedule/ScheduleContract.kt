@@ -21,7 +21,6 @@ interface ScheduleContract {
     interface Presenter : BasePresenter {
         fun loadWeekScheduleForSelectedDay(day: LocalDate)
         fun loadCurrentWeekSchedule()
-        fun refresh()
     }
 
 }

@@ -46,22 +46,22 @@ class ScheduleDataRepository private constructor(
         }
     }
 
-    fun saveScheduleData(appContext: Context, scheduleData: List<ZajeciaItem>) {
+    /*fun saveScheduleData(appContext: Context, scheduleData: List<ZajeciaItem>) {
         scheduleLocalDataSource.saveScheduleData(appContext, scheduleData)
         // Do in memory cache update to keep the app UI up to date
         if (cachedData == null) {
             cachedData = scheduleData
         }
-    }
+    }*/
 
     fun refreshScheduleData() {
         cacheIsDirty = true
     }
 
-    fun deleteAllLocalScheduleData(appContext: Context) {
+    /*fun deleteAllLocalScheduleData(appContext: Context) {
         scheduleLocalDataSource.deleteAllScheduleData(appContext)
         cachedData = null
-    }
+    }*/
 
     private fun getScheduleDataFromRemoteDataSource(
             appContext: Context,
@@ -72,7 +72,7 @@ class ScheduleDataRepository private constructor(
         scheduleRemoteDataSource.getScheduleData(appContext, from, to, object : ScheduleDataSource.LoadScheduleDataCallback {
             override fun onDataLoaded(scheduleData: List<ZajeciaItem>) {
                 refreshCache(scheduleData)
-                refreshLocalDataSource(appContext, scheduleData)
+                //refreshLocalDataSource(appContext, scheduleData)
                 callback.onDataLoaded(scheduleData)
             }
 
@@ -88,10 +88,10 @@ class ScheduleDataRepository private constructor(
         cacheIsDirty = false
     }
 
-    private fun refreshLocalDataSource(appContext: Context, scheduleData: List<ZajeciaItem>) {
+    /*private fun refreshLocalDataSource(appContext: Context, scheduleData: List<ZajeciaItem>) {
         scheduleLocalDataSource.deleteAllScheduleData(appContext)
         scheduleLocalDataSource.saveScheduleData(appContext, scheduleData)
-    }
+    }*/
 
     companion object {
         private var INSTANCE: ScheduleDataRepository? = null

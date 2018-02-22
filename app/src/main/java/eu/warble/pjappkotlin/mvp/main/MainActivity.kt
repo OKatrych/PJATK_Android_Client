@@ -8,6 +8,7 @@ import com.ncapdevi.fragnav.FragNavController
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
+import eu.warble.pjappkotlin.mvp.schedule.ScheduleFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.StudentInfoFragment
 import eu.warble.pjappkotlin.utils.Injection
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
@@ -98,7 +99,7 @@ class MainActivity : BaseActivity(),
     override fun getRootFragment(index: Int): Fragment {
         return when (index) {
             INDEX_STUDENT -> StudentInfoFragment.newInstance()
-            INDEX_SCHEDULE -> StudentInfoFragment.newInstance()
+            INDEX_SCHEDULE -> ScheduleFragment.newInstance()
             INDEX_MAP -> StudentInfoFragment.newInstance()
             INDEX_FTP -> StudentInfoFragment.newInstance()
             INDEX_MORE -> StudentInfoFragment.newInstance()

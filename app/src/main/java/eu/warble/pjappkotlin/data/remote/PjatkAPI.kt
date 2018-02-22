@@ -114,7 +114,7 @@ class PjatkAPI private constructor(credentials: CredentialsManager.Credentials) 
         private val OK = 200
 
         @JvmStatic
-        fun getInstance(credentials: CredentialsManager.Credentials): StudentDataSource {
+        fun getInstance(credentials: CredentialsManager.Credentials): PjatkAPI {
             return INSTANCE ?: PjatkAPI(credentials).apply { INSTANCE = this }
         }
 
