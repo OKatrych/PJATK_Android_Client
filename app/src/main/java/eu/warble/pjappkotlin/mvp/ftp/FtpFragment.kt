@@ -5,7 +5,7 @@ import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
 
-class ScheduleFragment : BaseFragment(), FtpContact.View {
+class FtpFragment : BaseFragment(), FtpContact.View {
 
     override val TAG: String = "fragment_ftp"
 
@@ -23,7 +23,11 @@ class ScheduleFragment : BaseFragment(), FtpContact.View {
 
     }
 
+    fun initPresenter() {
+
+    }
+
     companion object {
-        fun newInstance() = ScheduleFragment()
+        fun newInstance() = FtpFragment()
     }
 }

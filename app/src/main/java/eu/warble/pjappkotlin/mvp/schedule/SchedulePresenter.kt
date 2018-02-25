@@ -5,6 +5,7 @@ import eu.warble.pjappkotlin.data.ScheduleDataRepository
 import eu.warble.pjappkotlin.data.ScheduleDataSource
 import eu.warble.pjappkotlin.data.model.ZajeciaItem
 import eu.warble.pjappkotlin.utils.ScheduleManager
+import eu.warble.pjappkotlin.view.WeekDatePicker
 import org.threeten.bp.LocalDate
 
 class SchedulePresenter(
@@ -42,10 +43,11 @@ class SchedulePresenter(
     private fun showSchedule(selectedDay: LocalDate, from: LocalDate, to: LocalDate, scheduleData: List<ZajeciaItem>) {
         val datePicker = view.datePicker
         val scheduleManager = ScheduleManager(scheduleData)
-        datePicker.setLimits(from, to)
-        datePicker.selectDay(selectedDay)
-        datePicker.setOnDateSelectedListener {
-            view.updateList(scheduleManager.getLessonsForDate(it))
-        }
+        datePicker.setOnDateSelectedListener(object : WeekDatePicker.OnDaySelectedListener {
+            override fun onDaySelected(selectedDay: LocalDate) {
+                view.updateList(scheduleManager.getLessonsForDate(selectedDay))
+            }
+        })
+        datePicker.updateDates(selectedDay)
     }
 }

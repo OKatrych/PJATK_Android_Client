@@ -16,16 +16,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.main.MainActivity"/>
-        <activity android:name=".mvp.splash.SplashActivity">
+        <activity
+            android:name=".mvp.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.login.LoginActivity"/>
-        <activity android:name=".mvp.list.ListActivity" />
+        <activity
+            android:name=".mvp.login.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".mvp.list.ListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

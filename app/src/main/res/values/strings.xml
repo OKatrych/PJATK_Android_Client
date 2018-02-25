@@ -118,4 +118,14 @@
     <string name="or">OR</string>
     <string name="login_login_field_blank">Login cannot be blank</string>
     <string name="login_password_field_blank">Password cannot be blank</string>
+
+
+    <!-- Days of week -->
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
 </resources>

@@ -12,9 +12,9 @@ class ScheduleDataRepository private constructor(
 
     private val scheduleLocalDataSource = ScheduleLocalDataSource
 
+    private var cachedFrom: LocalDate? = null
+    private var cachedTo: LocalDate? = null
     private var cachedData: List<ZajeciaItem>? = null
-
-    private var cacheIsDirty = false
 
     override fun getScheduleData(
             appContext: Context,
@@ -24,18 +24,18 @@ class ScheduleDataRepository private constructor(
     ) {
         // Respond immediately with cache if available and not dirty
         val mCachedData = cachedData
-        if (mCachedData != null && !cacheIsDirty) {
+        if (mCachedData != null && !checkCacheIsDirty(from, to)) {
             callback.onDataLoaded(mCachedData)
             return
         }
-        if (cacheIsDirty) {
+        if (checkCacheIsDirty(from, to)) {
             // If the cache is dirty we need to fetch new data from the network.
             getScheduleDataFromRemoteDataSource(appContext, from, to, callback)
         } else {
             // Query the local storage if available. If not, query the network.
             scheduleLocalDataSource.getScheduleData(appContext, from, to, object : ScheduleDataSource.LoadScheduleDataCallback {
                 override fun onDataLoaded(scheduleData: List<ZajeciaItem>) {
-                    refreshCache(scheduleData)
+                    refreshCache(from, to, scheduleData)
                     callback.onDataLoaded(scheduleData)
                 }
 
@@ -54,8 +54,11 @@ class ScheduleDataRepository private constructor(
         }
     }*/
 
-    fun refreshScheduleData() {
-        cacheIsDirty = true
+    private fun checkCacheIsDirty(from: LocalDate, to: LocalDate): Boolean {
+        return if (cachedFrom != null && cachedTo != null)
+            !(from.isEqual(cachedFrom) && to.isEqual(cachedTo))
+        else
+            true
     }
 
     /*fun deleteAllLocalScheduleData(appContext: Context) {
@@ -71,7 +74,7 @@ class ScheduleDataRepository private constructor(
     ) {
         scheduleRemoteDataSource.getScheduleData(appContext, from, to, object : ScheduleDataSource.LoadScheduleDataCallback {
             override fun onDataLoaded(scheduleData: List<ZajeciaItem>) {
-                refreshCache(scheduleData)
+                refreshCache(from, to, scheduleData)
                 //refreshLocalDataSource(appContext, scheduleData)
                 callback.onDataLoaded(scheduleData)
             }
@@ -82,10 +85,11 @@ class ScheduleDataRepository private constructor(
         })
     }
 
-    private fun refreshCache(scheduleData: List<ZajeciaItem>) {
+    private fun refreshCache(from: LocalDate, to: LocalDate, scheduleData: List<ZajeciaItem>) {
         cachedData = null
         cachedData = scheduleData
-        cacheIsDirty = false
+        cachedFrom = from
+        cachedTo = to
     }
 
     /*private fun refreshLocalDataSource(appContext: Context, scheduleData: List<ZajeciaItem>) {

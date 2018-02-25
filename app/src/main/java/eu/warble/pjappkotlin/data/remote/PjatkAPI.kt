@@ -57,29 +57,27 @@ class PjatkAPI private constructor(credentials: CredentialsManager.Credentials) 
 
     override fun getScheduleData(appContext: Context, from: LocalDate, to: LocalDate, callback: ScheduleDataSource.LoadScheduleDataCallback) {
         AppExecutors.NETWORK().execute {
-            makeRequest("${Constants.API_STUDENT_SCHEDULE}&${from.format(Constants.API_DATE_FORMAT)}&${to.format(Constants.API_DATE_FORMAT)}",
-                    object : ResponseCallback {
-                        override fun onResponseLoaded(response: Response) {
-                            val body = response.body()
-                            if (body != null) {
-                                val scheduleData = Converter.jsonStringToScheduleList(
-                                        Converter.responseToString(body)
-                                )
-                                if (scheduleData != null) {
-                                    AppExecutors.MAIN().execute { callback.onDataLoaded(scheduleData) }
-                                } else {
-                                    onError(Constants.UNKNOWN_ERROR)
-                                }
-                            } else {
-                                onError(Constants.UNKNOWN_ERROR)
-                            }
+            val url = "${Constants.API_STUDENT_SCHEDULE}begin=${from.format(Constants.API_DATE_FORMAT)}&end=${to.format(Constants.API_DATE_FORMAT)}"
+            makeRequest(url, object : ResponseCallback {
+                override fun onResponseLoaded(response: Response) {
+                    val body = response.body()
+                    if (body != null) {
+                        val json = Converter.responseToString(body)
+                        val scheduleData = Converter.jsonStringToScheduleList(json)
+                        if (scheduleData != null) {
+                            AppExecutors.MAIN().execute { callback.onDataLoaded(scheduleData) }
+                        } else {
+                            onError(Constants.UNKNOWN_ERROR)
                         }
-
-                        override fun onError(error: String) {
-                            AppExecutors.MAIN().execute { callback.onDataNotAvailable(error) }
-                        }
+                    } else {
+                        onError(Constants.UNKNOWN_ERROR)
                     }
-            )
+                }
+
+                override fun onError(error: String) {
+                    AppExecutors.MAIN().execute { callback.onDataNotAvailable(error) }
+                }
+            })
         }
     }
 

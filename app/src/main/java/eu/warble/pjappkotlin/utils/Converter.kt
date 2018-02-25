@@ -26,7 +26,7 @@ object Converter {
 
     fun jsonStringToScheduleList(json: String?): List<ZajeciaItem>? {
         if (json != null) {
-            val listType = object : TypeToken<ArrayList<List<ZajeciaItem>>>() {}.type
+            val listType = object : TypeToken<List<ZajeciaItem>>() {}.type
             return Gson().fromJson(json, listType)
         }
         return null

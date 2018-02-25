@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include
+        android:id="@+id/day1"
+        layout="@layout/week_date_picker_item" />
+
+    <include
+        android:id="@+id/day2"
+        layout="@layout/week_date_picker_item" />
+
+    <include
+        android:id="@+id/day3"
+        layout="@layout/week_date_picker_item" />
+
+    <include
+        android:id="@+id/day4"
+        layout="@layout/week_date_picker_item" />
+
+    <include
+        android:id="@+id/day5"
+        layout="@layout/week_date_picker_item" />
+
+    <include
+        android:id="@+id/day6"
+        layout="@layout/week_date_picker_item" />
+
+    <include
+        android:id="@+id/day7"
+        layout="@layout/week_date_picker_item" />
+</merge>

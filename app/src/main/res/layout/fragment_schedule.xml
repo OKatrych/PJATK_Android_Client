@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,9 +11,10 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/main_appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="top">
 
-        <solar.blaz.date.week.WeekDatePicker
+        <!--<solar.blaz.date.week.WeekDatePicker
             android:id="@+id/date_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,37 +29,62 @@
             app:wdp_indicatorDrawable="@drawable/date_picker_indicator"
             app:wdp_labelPadding="5dp"
             app:wdp_labelTextColor="@color/primaryText"
-            app:wdp_labelTextSize="12sp" />
+            app:wdp_labelTextSize="12sp" />-->
+        <eu.warble.pjappkotlin.view.WeekDatePicker
+            android:id="@+id/week_date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </eu.warble.pjappkotlin.view.WeekDatePicker>
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/loading_screen"
+        android:id="@+id/schedule_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ProgressBar
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/schedule_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/secondaryBackground"
+            android:clipToPadding="false"
+            android:padding="5dp"
+            android:scrollbars="none">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/empty_lessons_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_lessons"
+            android:visibility="gone" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/calendar_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            app:fabSize="normal"
+            android:layout_gravity="bottom|end"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <FrameLayout
+            android:id="@+id/loading_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+        </FrameLayout>
     </FrameLayout>
-
-    <TextView
-        android:id="@+id/empty_lessons_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_lessons"
-        android:visibility="gone" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/schedule_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/secondaryBackground"
-        android:clipToPadding="false"
-        android:padding="5dp"
-        android:scrollbars="none" />
-
 </LinearLayout>
