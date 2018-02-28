@@ -12,7 +12,7 @@ class ApplicationNavigator(private val baseActivity: BaseActivity) {
         baseActivity.finish()
     }
 
-    fun goToLoginActivity(){
+    fun goToLoginActivity() {
         val intent = Intent(baseActivity, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         baseActivity.startActivity(intent)

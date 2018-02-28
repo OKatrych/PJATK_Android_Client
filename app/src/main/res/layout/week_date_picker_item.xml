@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/day_of_week_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textColor="@color/primaryText"
+        android:textSize="14sp"
+        tools:text="Wed" />
+
+    <FrameLayout
+        android:id="@+id/day_of_month_container"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/day_of_month_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/primaryText"
+            android:textSize="14sp"
+            tools:text="18" />
+    </FrameLayout>
+
+</LinearLayout>

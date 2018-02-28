@@ -39,7 +39,6 @@ class LoginPresenter(
         repository.getStudentData(appContext, object : StudentDataSource.LoadStudentDataCallback {
             override fun onDataLoaded(studentData: Student) {
                 CredentialsManager.saveCredentials(login, password, appContext)
-                view.showError("Zajebiście")
                 view.showLoading(false)
                 view.applicationNavigator.goToMainActivity()
             }

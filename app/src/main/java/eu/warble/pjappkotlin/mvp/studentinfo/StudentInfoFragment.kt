@@ -12,8 +12,8 @@ import eu.warble.pjappkotlin.mvp.BaseFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.about.StudentAboutFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.fees.StudentFeesFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.marks.StudentMarksFragment
-import kotlinx.android.synthetic.main.fragment_student_info.tabLayout
-import kotlinx.android.synthetic.main.fragment_student_info.viewPager
+import kotlinx.android.synthetic.main.fragment_student_info.view.tabLayout
+import kotlinx.android.synthetic.main.fragment_student_info.view.viewPager
 
 class StudentInfoFragment : BaseFragment() {
 
@@ -26,15 +26,16 @@ class StudentInfoFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_student_about, container, false)
+        val view = inflater.inflate(R.layout.fragment_student_info, container, false)
         setHasOptionsMenu(true)
-        initTabs()
+        initTabs(view)
         return view
     }
 
-    private fun initTabs() {
-        viewPager.adapter = TabsFragmentAdapter(mContext, childViews, childFragmentManager)
-        tabLayout.setupWithViewPager(viewPager)
+    private fun initTabs(view: View) {
+        val adapter = TabsFragmentAdapter(mContext, childViews, childFragmentManager)
+        view.viewPager.adapter = adapter
+        view.tabLayout.setupWithViewPager(view.viewPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

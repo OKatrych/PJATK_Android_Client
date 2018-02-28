@@ -16,18 +16,18 @@ import kotlinx.android.synthetic.main.card_balance.balance
 import kotlinx.android.synthetic.main.card_balance.balance_payments
 import kotlinx.android.synthetic.main.card_balance.balance_receivables
 import kotlinx.android.synthetic.main.card_balance.balance_withdrawals
-import kotlinx.android.synthetic.main.card_payments.btn_payments_history
 import kotlinx.android.synthetic.main.card_payments.payments_date1
 import kotlinx.android.synthetic.main.card_payments.payments_date1_amount
 import kotlinx.android.synthetic.main.card_payments.payments_date2
 import kotlinx.android.synthetic.main.card_payments.payments_date2_amount
-import kotlinx.android.synthetic.main.card_receivables.btn_receivables_history
+import kotlinx.android.synthetic.main.card_payments.view.btn_payments_history
 import kotlinx.android.synthetic.main.card_receivables.receivables_item1
 import kotlinx.android.synthetic.main.card_receivables.receivables_item1_amount
 import kotlinx.android.synthetic.main.card_receivables.receivables_item1_date
 import kotlinx.android.synthetic.main.card_receivables.receivables_item2
 import kotlinx.android.synthetic.main.card_receivables.receivables_item2_amount
 import kotlinx.android.synthetic.main.card_receivables.receivables_item2_date
+import kotlinx.android.synthetic.main.card_receivables.view.btn_receivables_history
 
 class StudentFeesFragment : BaseFragment(), StudentFeesContract.View{
 
@@ -35,12 +35,14 @@ class StudentFeesFragment : BaseFragment(), StudentFeesContract.View{
 
     override lateinit var presenter: StudentFeesContract.Presenter
 
-    override val applicationNavigator: ApplicationNavigator = ApplicationNavigator(activity as BaseActivity)
+    override val applicationNavigator: ApplicationNavigator by lazy {
+        ApplicationNavigator(activity as BaseActivity)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_student_fees, container, false)
         initPresenter()
-        initListeners()
+        initListeners(view)
         return view
     }
 
@@ -49,11 +51,11 @@ class StudentFeesFragment : BaseFragment(), StudentFeesContract.View{
         presenter.start()
     }
 
-    private fun initListeners() {
-        btn_payments_history.setOnClickListener {
+    private fun initListeners(view: View) {
+        view.btn_payments_history.setOnClickListener {
             applicationNavigator.goToListActivity(Constants.ListActivityAdapterType.PAYMENT)
         }
-        btn_receivables_history.setOnClickListener {
+        view.btn_receivables_history.setOnClickListener {
             applicationNavigator.goToListActivity(Constants.ListActivityAdapterType.RECEIVABLE)
         }
     }

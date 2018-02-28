@@ -25,7 +25,7 @@ class SplashPresenter(
                 return
             }
             isNetworkAvailable() -> {
-                studentDataRepository.refreshStudentData()
+                studentDataRepository.refreshStudentData(appContext)
                 studentDataRepository.getStudentData(
                         appContext,
                         object : StudentDataSource.LoadStudentDataCallback {

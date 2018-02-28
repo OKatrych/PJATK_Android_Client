@@ -50,8 +50,9 @@ class StudentDataRepository private constructor(
         }
     }
 
-    fun refreshStudentData() {
+    fun refreshStudentData(appContext: Context) {
         cacheIsDirty = true
+        deleteAllLocalStudentData(appContext)
     }
 
     fun deleteAllLocalStudentData(appContext: Context) {

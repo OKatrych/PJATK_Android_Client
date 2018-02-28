@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/main_appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="top">
 
-        <solar.blaz.date.week.WeekDatePicker
-            android:id="@+id/date_picker"
+        <eu.warble.pjappkotlin.view.WeekDatePicker
+            android:id="@+id/week_date_picker"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:textSize="18sp"
-            android:textColor="@color/primaryText"
-            android:background="@color/colorPrimary"
-            app:wdp_labelTextSize="12sp"
-            app:wdp_labelPadding="5dp"
-            app:wdp_labelTextColor="@color/primaryText"
-            app:wdp_dayBackground="@drawable/date_picker_day_bg"
-            app:wdp_indicatorDrawable="@drawable/date_picker_indicator"
-            app:wdp_firstDayOfWeek="monday"/>
+            android:layout_height="wrap_content">
+
+        </eu.warble.pjappkotlin.view.WeekDatePicker>
     </android.support.design.widget.AppBarLayout>
 
-
-    <TextView
-        android:id="@+id/empty_lessons_text"
+    <FrameLayout
+        android:id="@+id/schedule_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_lessons"
-        android:visibility="gone" />
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/schedule_listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        style="@style/Widget.AppCompat.ListView"
-        android:background="@color/secondaryBackground"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5dp"
-        android:clipToPadding="false"
-        android:headerDividersEnabled="true"
-        android:scrollbars="none"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/schedule_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/secondaryBackground"
+            android:clipToPadding="false"
+            android:padding="5dp"
+            android:scrollbars="none">
 
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/empty_lessons_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_lessons"
+            android:visibility="gone" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/calendar_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:fabSize="normal"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/loading_screen"
+            layout="@layout/fragment_loading"
+            android:visibility="gone" />
+    </FrameLayout>
 </LinearLayout>
