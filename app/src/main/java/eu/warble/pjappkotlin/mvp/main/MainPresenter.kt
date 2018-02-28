@@ -35,17 +35,19 @@ class MainPresenter(
 
     override fun checkApiResponseForErrors() {
         if (!guestModeEnabled) {
-            studentDataRepository?.getStudentData(appContext, object : StudentDataSource.LoadStudentDataCallback {
-                override fun onDataLoaded(studentData: Student) {
-                    if (!Tools.checkApiResponseForErrors(studentData)) {
-                        view.showApiError(null)
-                    }
-                }
+            studentDataRepository?.getStudentData(appContext,
+                    object : StudentDataSource.LoadStudentDataCallback {
+                        override fun onDataLoaded(studentData: Student) {
+                            if (!Tools.checkApiResponseForErrors(studentData)) {
+                                view.showApiError(null)
+                            }
+                        }
 
-                override fun onDataNotAvailable(error: String) {
-                    view.showApiError(error)
-                }
-            })
+                        override fun onDataNotAvailable(error: String) {
+                            view.showApiError(error)
+                        }
+                    }
+            )
         }
     }
 

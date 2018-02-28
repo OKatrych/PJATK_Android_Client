@@ -1,6 +1,8 @@
 package eu.warble.pjappkotlin.mvp.ftp
 
+import android.content.Context
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
+import eu.warble.pjappkotlin.utils.Injection
 import kotlinx.android.synthetic.main.fragment_ftp.view.directories_list
 import kotlinx.android.synthetic.main.fragment_ftp.view.loading_screen
 
@@ -29,13 +32,15 @@ class FtpFragment : BaseFragment(), FtpContact.View {
         val view = inflater.inflate(R.layout.fragment_ftp, container, false)
         initViews(view)
         initPresenter()
+        presenter.start()
         return view
     }
 
     private fun initViews(view: View) {
         loadingScreen = view.loading_screen
         directoriesList = view.directories_list
-        directoriesList.adapter = FtpListAdapter(mContext, emptyList())
+        directoriesList.layoutManager = LinearLayoutManager(directoriesList.context)
+        directoriesList.adapter = FtpListAdapter(emptyList())
     }
 
     override fun showLoadingScreen(show: Boolean) {
@@ -46,8 +51,12 @@ class FtpFragment : BaseFragment(), FtpContact.View {
         (directoriesList.adapter as FtpListAdapter).updateList(newData)
     }
 
-    fun initPresenter() {
-
+    private fun initPresenter() {
+        presenter = FtpPresenter(
+                Injection.provideCredentials(mContext as Context),
+                this,
+                mContext as Context
+        )
     }
 
     companion object {

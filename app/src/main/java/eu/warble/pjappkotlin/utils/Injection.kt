@@ -10,16 +10,20 @@ import eu.warble.pjappkotlin.data.remote.PjatkAPI
 object Injection {
 
     fun provideStudentDataRepository(appContext: Context): StudentDataRepository? {
-        CredentialsManager.getCredentials(appContext)?.let {
+        provideCredentials(appContext)?.let {
             return StudentDataRepository.getInstance(PjatkAPI.getInstance(it))
         }
         return null
     }
 
     fun provideScheduleDataRepository(appContext: Context): ScheduleDataRepository? {
-        CredentialsManager.getCredentials(appContext)?.let {
+        provideCredentials(appContext)?.let {
             return ScheduleDataRepository.getInstance(PjatkAPI.getInstance(it))
         }
         return null
+    }
+
+    fun provideCredentials(appContext: Context): CredentialsManager.Credentials? {
+        return CredentialsManager.getCredentials(appContext)
     }
 }

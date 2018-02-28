@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.list_item_ftp.view.file_image
 import kotlinx.android.synthetic.main.list_item_ftp.view.file_name
 
 class FtpListAdapter(
-        private val context: Context?,
         ftpData: List<GetterFile>
 ) : RecyclerView.Adapter<FtpListAdapter.ViewHolder>(), Filterable {
 
@@ -43,7 +42,7 @@ class FtpListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.list_item_schedule))
+        return ViewHolder(parent.inflate(R.layout.list_item_ftp))
     }
 
     private fun getFileIcon(fileName: String): Int {

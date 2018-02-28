@@ -8,6 +8,7 @@ import com.ncapdevi.fragnav.FragNavController
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
+import eu.warble.pjappkotlin.mvp.ftp.FtpFragment
 import eu.warble.pjappkotlin.mvp.schedule.ScheduleFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.StudentInfoFragment
 import eu.warble.pjappkotlin.utils.Injection
@@ -15,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 
 class MainActivity : BaseActivity(),
                      FragNavController.TransactionListener,
-                     FragNavController.RootFragmentListener,
                      MainContract.View {
 
     override lateinit var presenter: MainContract.Presenter
@@ -26,8 +26,15 @@ class MainActivity : BaseActivity(),
     private val INDEX_MAP = FragNavController.TAB3
     private val INDEX_FTP = FragNavController.TAB4
     private val INDEX_MORE = FragNavController.TAB5
-
     private var fragNavController: FragNavController? = null
+
+    private val fragments: List<Fragment> = mutableListOf(
+            StudentInfoFragment.newInstance(),
+            ScheduleFragment.newInstance(),
+            StudentInfoFragment.newInstance(),
+            FtpFragment.newInstance(),
+            StudentInfoFragment.newInstance()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +75,7 @@ class MainActivity : BaseActivity(),
                 R.id.main_content
         )
                 .transactionListener(this)
-                .rootFragmentListener(this, 5)
+                .rootFragments(fragments)
                 .switchController { id, _ -> bottomNavigationView.selectedItemId = id }
                 .build()
         fragNavController?.executePendingTransactions()
@@ -94,17 +101,6 @@ class MainActivity : BaseActivity(),
 
     override fun onTabTransaction(fragment: Fragment?, index: Int) {
         updateActionBar(index)
-    }
-
-    override fun getRootFragment(index: Int): Fragment {
-        return when (index) {
-            INDEX_STUDENT -> StudentInfoFragment.newInstance()
-            INDEX_SCHEDULE -> ScheduleFragment.newInstance()
-            INDEX_MAP -> StudentInfoFragment.newInstance()
-            INDEX_FTP -> StudentInfoFragment.newInstance()
-            INDEX_MORE -> StudentInfoFragment.newInstance()
-            else -> throw IllegalStateException("Need to send an index that we know")
-        }
     }
 
     private fun updateActionBar(index: Int) {
