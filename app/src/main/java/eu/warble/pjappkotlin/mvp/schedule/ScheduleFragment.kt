@@ -43,23 +43,32 @@ class ScheduleFragment : BaseFragment(), ScheduleContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_schedule, container, false)
         initViews(view)
-        initScheduleAdapter(view)
+        initScheduleList(view)
         initPresenter()
         return view
     }
 
-    private fun initViews(view: View){
+    private fun initViews(view: View) {
         initFAB(view)
         emptyText = view.empty_lessons_text
         loadingScreen = view.loading_screen
         datePicker = view.week_date_picker
     }
 
-    private fun initScheduleAdapter(view: View) {
+    private fun initScheduleList(view: View) {
         scheduleList = view.schedule_list
         scheduleList.layoutManager = LinearLayoutManager(mContext)
         scheduleList.adapter = ScheduleListAdapter(mContext, emptyList())
         scheduleList.invalidate()
+        scheduleList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                when {
+                    dy > 0 -> calendarFAB.hide()
+                    dy < 0 -> calendarFAB.show()
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
     }
 
     private fun initFAB(view: View) {

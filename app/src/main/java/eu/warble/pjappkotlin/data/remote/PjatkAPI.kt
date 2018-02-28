@@ -9,6 +9,7 @@ import eu.warble.pjappkotlin.utils.AppExecutors
 import eu.warble.pjappkotlin.utils.Converter
 import eu.warble.pjappkotlin.utils.CredentialsManager
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
 import org.threeten.bp.LocalDate
@@ -24,6 +25,7 @@ class PjatkAPI private constructor(credentials: CredentialsManager.Credentials) 
         if (login != null && password != null) {
             httpClient = OkHttpClient.Builder()
                     .authenticator(NTLMAuthenticator(login, password))
+                    .protocols(listOf(Protocol.HTTP_1_1))
                     .connectTimeout(8, TimeUnit.SECONDS)
                     .build()
         }
@@ -55,7 +57,12 @@ class PjatkAPI private constructor(credentials: CredentialsManager.Credentials) 
         }
     }
 
-    override fun getScheduleData(appContext: Context, from: LocalDate, to: LocalDate, callback: ScheduleDataSource.LoadScheduleDataCallback) {
+    override fun getScheduleData(
+            appContext: Context,
+            from: LocalDate,
+            to: LocalDate,
+            callback: ScheduleDataSource.LoadScheduleDataCallback
+    ) {
         AppExecutors.NETWORK().execute {
             val url = "${Constants.API_STUDENT_SCHEDULE}begin=${from.format(Constants.API_DATE_FORMAT)}&end=${to.format(Constants.API_DATE_FORMAT)}"
             makeRequest(url, object : ResponseCallback {

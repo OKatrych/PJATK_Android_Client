@@ -9,7 +9,7 @@ interface FtpContact {
     interface View : BaseView<Presenter> {
         val applicationNavigator: ApplicationNavigator
         fun showLoadingScreen(show: Boolean)
-        fun updateDirectoriesList(newData: List<GetterFile>)
+        fun updateDirectoriesList(newData: ArrayList<GetterFile>)
     }
 
     interface Presenter : BasePresenter {
