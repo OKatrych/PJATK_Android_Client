@@ -25,7 +25,7 @@ object NotificationManager {
                 Context.NOTIFICATION_SERVICE
         ) as NotificationManager
         val bundle = Bundle().apply {
-            putInt("id", notificationsIdCounter++)
+            putInt("id", ++notificationsIdCounter)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel(notificationManager)

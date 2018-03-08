@@ -149,4 +149,8 @@ class MainActivity : BaseActivity(),
                 }
                 .show()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
 }

@@ -7,6 +7,7 @@ import eu.warble.getter.Getter
 import eu.warble.getter.LoadDirectoryCallback
 import eu.warble.getter.model.Credentials
 import eu.warble.getter.model.GetterFile
+import eu.warble.getter.utils.Converter
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.utils.Constants
 import eu.warble.pjappkotlin.utils.CredentialsManager
