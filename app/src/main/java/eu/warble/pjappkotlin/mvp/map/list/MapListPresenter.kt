@@ -12,6 +12,8 @@ class MapListPresenter(
         val context: Context
 ) : MapListContact.Presenter {
 
+    override var selectedBuilding: IndoorwayBuilding? = null
+
     override fun start() {
         loadBuildings()
     }
@@ -23,7 +25,8 @@ class MapListPresenter(
                     .buildings()
                     .setOnCompletedListener(Action1 {
                         view.showLoadingScreen(false)
-                        view.updateMapListItems(it, MapListItemType.BUILDING)
+                        selectedBuilding = null
+                        view.updateBuildingsListItems(it)
                     })
                     .setOnFailedListener(Action1 {
                         view.showLoadingScreen(false)
@@ -43,7 +46,8 @@ class MapListPresenter(
                     .listMaps(building.uuid)
                     .setOnCompletedListener(Action1 {
                         view.showLoadingScreen(false)
-                        view.updateMapListItems(it, MapListItemType.MAP)
+                        selectedBuilding = building
+                        view.updateMapsListItems(it)
                     })
                     .setOnFailedListener(Action1 {
                         view.showLoadingScreen(false)

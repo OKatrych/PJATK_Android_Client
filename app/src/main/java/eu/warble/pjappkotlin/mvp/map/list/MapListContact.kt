@@ -9,12 +9,14 @@ import eu.warble.pjappkotlin.mvp.BaseView
 interface MapListContact {
     interface View : BaseView<Presenter> {
         val applicationNavigator: ApplicationNavigator
-        fun updateMapListItems(items: List<Any>, type: MapListItemType)
+        fun updateMapsListItems(items: List<IndoorwayObjectId>)
+        fun updateBuildingsListItems(items: List<IndoorwayBuilding>)
         fun showMap(buildingUUID: String, map: IndoorwayObjectId)
         fun showLoadingScreen(show: Boolean)
     }
 
     interface Presenter : BasePresenter {
+        var selectedBuilding: IndoorwayBuilding?
         fun loadBuildings()
         fun loadMaps(building: IndoorwayBuilding)
     }

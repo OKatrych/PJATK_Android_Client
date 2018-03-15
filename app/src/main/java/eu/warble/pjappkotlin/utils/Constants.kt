@@ -6,6 +6,8 @@ import org.threeten.bp.format.DateTimeFormatter
 object Constants {
     val PJAPP_PREFS = "Pjapp-prefs"
 
+    val EMPTY_STRING = ""
+
     val CREDENTIALS_ERROR = "CREDENTIALS_ERROR"
     val CONNECTION_ERROR = "CONNECTION_ERROR"
     val UNKNOWN_ERROR = "UNKNOWN_ERROR"

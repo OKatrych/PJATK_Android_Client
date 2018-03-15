@@ -1,9 +1,7 @@
 package eu.warble.pjappkotlin.mvp.map.list
 
 import android.content.Context
-import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +20,7 @@ class BuildingsListAdapter(
 
     private var items = ArrayList<IndoorwayBuilding>(buildings)
 
-    fun updateList(newData: ArrayList<IndoorwayBuilding>) {
+    fun updateList(newData: List<IndoorwayBuilding>) {
         items.clear()
         items.addAll(newData)
         notifyDataSetChanged()
@@ -37,7 +35,7 @@ class BuildingsListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.list_item_ftp))
+        return ViewHolder(parent.inflate(R.layout.list_item_map_building))
     }
 
     private fun getBuildingTag(buildingName: String?): String {
@@ -64,13 +62,11 @@ class BuildingsListAdapter(
         private val coloredSquare: View = itemView.color_container
 
         fun bind(building: IndoorwayBuilding, onItemClick: (IndoorwayBuilding) -> Unit) {
-            with(itemView) {
-                itemView.setOnClickListener { onItemClick(building) }
-                val tag = getBuildingTag(building.name)
-                buildingTag.text = tag
-                buildingName.text = building.name
-                coloredSquare.setBackgroundColor(getBuildingColor(context, tag))
-            }
+            itemView.setOnClickListener { onItemClick(building) }
+            val tag = getBuildingTag(building.name)
+            buildingTag.text = tag
+            buildingName.text = building.name
+            coloredSquare.setBackgroundColor(getBuildingColor(itemView.context, tag))
         }
     }
 }

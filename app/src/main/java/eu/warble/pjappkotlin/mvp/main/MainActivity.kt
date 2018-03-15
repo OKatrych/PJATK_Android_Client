@@ -8,7 +8,9 @@ import com.ncapdevi.fragnav.FragNavController
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
+import eu.warble.pjappkotlin.mvp.BaseFragment
 import eu.warble.pjappkotlin.mvp.ftp.FtpFragment
+import eu.warble.pjappkotlin.mvp.map.list.MapListFragment
 import eu.warble.pjappkotlin.mvp.schedule.ScheduleFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.StudentInfoFragment
 import eu.warble.pjappkotlin.utils.Injection
@@ -31,7 +33,7 @@ class MainActivity : BaseActivity(),
     private val fragments: List<Fragment> = mutableListOf(
             StudentInfoFragment.newInstance(),
             ScheduleFragment.newInstance(),
-            StudentInfoFragment.newInstance(),
+            MapListFragment.newInstance(),
             FtpFragment.newInstance(),
             StudentInfoFragment.newInstance()
     )
@@ -150,7 +152,20 @@ class MainActivity : BaseActivity(),
                 .show()
     }
 
+
     override fun onBackPressed() {
-        super.onBackPressed()
+        val fragmentsList = supportFragmentManager.fragments
+        var handled = false
+        fragmentsList.forEach {
+            if (it is BaseFragment) {
+                handled = it.onBack()
+                if (handled) {
+                    return@forEach
+                }
+            }
+        }
+        if (!handled){
+            super.onBackPressed()
+        }
     }
 }

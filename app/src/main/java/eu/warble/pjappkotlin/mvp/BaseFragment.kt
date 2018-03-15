@@ -28,4 +28,8 @@ abstract class BaseFragment : Fragment() {
         if (activity != null)
             (activity as BaseActivity).showMessage(message)
     }
+
+    open fun onBack(): Boolean {
+        return false
+    }
 }
