@@ -30,7 +30,7 @@
     <string name="cant_open_file">No handler for this type of file</string>
     <string name="app_settings">App Settings</string>
     <string name="permissions_required">Permissions Required</string>
-    <string name="permissions_declined">Permissions Declined</string>
+    <string name="permissions_declined">Permissions Declined, you always can give permissions in device settings.</string>
     <string name="permissions_message">In order to save downloaded files, access to storage is needed. Please enable these permissions from the app settings.</string>
     <string name="permissions_message2">In order to save downloaded files, the app needs access to the storage.</string>
     <string name="choose_lang">Choose language</string>
@@ -90,7 +90,8 @@
     <string name="all_permissions_denied_feedback">Please enable permissions from the app settings.</string>
     <string name="permission_rationale_settings_button_text">Open</string>
     <string name="permission_rationale_title">Permissions Required</string>
-    <string name="permission_rationale_message">In order to save downloaded files, the app needs access to the storage.</string>
+    <string name="permission_rationale_storage_message">In order to save downloaded files, the app needs access to the storage.</string>
+    <string name="permission_rationale_location_service_message">In order to find your location, the app needs access to the bluetooth and location service.</string>
     <string name="account">Account</string>
     <string name="your_account_info">Your individual account number</string>
     <string name="pjatk">PJATK</string>
@@ -129,4 +130,6 @@
     <string name="saturday">Sat</string>
     <string name="sunday">Sun</string>
     <string name="download_start">Downloading started</string>
+    <string name="determining_location">Determining location</string>
+    <string name="error_map_load_failed">Map loading failed</string>
 </resources>

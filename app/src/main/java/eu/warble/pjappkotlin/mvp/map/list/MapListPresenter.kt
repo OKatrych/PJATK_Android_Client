@@ -34,7 +34,9 @@ class MapListPresenter(
                     })
                     .execute()
         } else {
-            view.showError(R.string.connect_error)
+            view.showErrorWithAction(R.string.connect_error, R.string.retry, {
+                loadBuildings()
+            })
         }
     }
 

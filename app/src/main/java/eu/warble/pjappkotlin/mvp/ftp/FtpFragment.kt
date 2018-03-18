@@ -94,7 +94,7 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
     @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
     fun showRationaleForStorage(request: PermissionRequest) {
         AlertDialog.Builder(mContext as Context)
-                .setMessage(R.string.permission_rationale_message)
+                .setMessage(R.string.permission_rationale_storage_message)
                 .setPositiveButton(R.string.button_allow, { _, _ -> request.proceed() })
                 .setNegativeButton(R.string.button_deny, { _, _ -> request.cancel() })
                 .setCancelable(false)

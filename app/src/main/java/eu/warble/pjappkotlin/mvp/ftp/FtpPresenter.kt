@@ -34,7 +34,9 @@ class FtpPresenter(
                             loadDirectory("/")
                         },
                         onFailure = {
-                            view.showError(R.string.connect_error)
+                            view.showErrorWithAction(R.string.connect_error, R.string.retry, {
+                                start()
+                            })
                             Log.e("Getter", it.message)
                         }
                 )
