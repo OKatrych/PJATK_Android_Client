@@ -16,10 +16,6 @@ class MapPresenter(
         val studentDataRepository: StudentDataRepository?
 ) : MapContract.Presenter {
 
-    companion object {
-        const val REQUEST_PERMISSION_CODE = 235
-    }
-
     private var needToFindLocation = false
 
     override fun start() {

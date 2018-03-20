@@ -37,8 +37,14 @@ class MapActivity : BaseActivity(), MapContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
         setTheme(R.style.AppTheme)
+        setContentView(R.layout.activity_map)
+
+        supportActionBar?.apply {
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         initPresenter()
         onExtraReceived()
     }
@@ -48,6 +54,7 @@ class MapActivity : BaseActivity(), MapContract.View {
         val mapUUID = intent.getStringExtra("mapUUID")
         val mapName = intent.getStringExtra("mapName")
         if (buildingUUID != null && mapUUID != null && mapName != null) {
+            setTitle(mapName)
             presenter.loadMap(buildingUUID, mapUUID, mapName)
         } else {
             findLocationWithPermissionCheck()
@@ -126,14 +133,16 @@ class MapActivity : BaseActivity(), MapContract.View {
         onRequestPermissionsResult(requestCode, grantResults)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                this.finish()
-                true
-            }
-            else -> false
+    private fun setTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            applicationNavigator.goBack()
+            return true
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initPresenter() {
