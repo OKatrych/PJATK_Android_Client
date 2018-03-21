@@ -17,6 +17,7 @@ class MapPresenter(
 ) : MapContract.Presenter {
 
     private var needToFindLocation = false
+    private var isLocationDetermined = false
 
     override fun start() {
         //no-op
@@ -47,6 +48,7 @@ class MapPresenter(
     }
 
     private fun onLocationDetermined(position: IndoorwayPosition) {
+        isLocationDetermined = true
         view.showDeterminingLocationScreen(false)
         view.showLoadingScreen(true)
         view.loadMap(
@@ -64,17 +66,21 @@ class MapPresenter(
     }
 
     private val positionChangeListener = Action1<IndoorwayPosition> {
-        view.printCurrentPosition(it)
+        if (!isLocationDetermined) {
+            onLocationDetermined(it)
+        } else {
+            view.printCurrentPosition(it)
+        }
     }
 
     private val stateChangeListener = Action1<IndoorwayLocationSdkState> {
-        when (it.name) {
+        /*when (it.name) {
             "LOCATING_FOREGROUND" -> {
                 IndoorwayLocationSdk.instance().position().latest()?.let {
                     this@MapPresenter.onLocationDetermined(it)
                 }
             }
-        }
+        }*/
     }
 
     private val stateErrorListener = Action1<IndoorwayLocationSdkError> {

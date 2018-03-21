@@ -35,6 +35,7 @@
         </activity>
         <activity
             android:name=".mvp.login.LoginActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".mvp.list.ListActivity"
