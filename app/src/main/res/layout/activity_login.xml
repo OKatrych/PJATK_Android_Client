@@ -105,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/round_shape"
+        android:background="@drawable/corner_shape"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/passwordInputLayout"
         app:layout_constraintStart_toStartOf="@+id/passwordInputLayout"

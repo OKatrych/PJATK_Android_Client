@@ -1,19 +1,20 @@
-package eu.warble.pjappkotlin.mvp.main
+package eu.warble.pjappkotlin.mvp.news
 
+import eu.warble.pjappkotlin.data.model.NewsItem
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BasePresenter
 import eu.warble.pjappkotlin.mvp.BaseView
 
 
-interface MainContract {
-
+interface NewsContract {
     interface View : BaseView<Presenter> {
         val applicationNavigator: ApplicationNavigator
-        fun showApiError(error: String?)
+        fun showNewsItems(items: ArrayList<NewsItem>)
+        fun showConnectionError()
     }
 
     interface Presenter : BasePresenter {
-        fun checkApiResponseForErrors()
-        fun logOut()
+        fun isNetworkAvailable(): Boolean
+
     }
 }

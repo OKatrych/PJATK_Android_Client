@@ -100,7 +100,10 @@ class PjatkAPI private constructor(credentials: CredentialsManager.Credentials) 
                 when (it?.code()) {
                     OK -> responseCallback.onResponseLoaded(it)
                     WRONG_CREDENTIALS -> responseCallback.onError(Constants.CREDENTIALS_ERROR)
-                    else -> responseCallback.onError(Constants.UNKNOWN_ERROR)
+                    else -> {
+                        Log.e("PjatkApi", "Error response code = ${it?.code()}")
+                        responseCallback.onError(Constants.UNKNOWN_ERROR)
+                    }
                 }
             }
         } catch (ex: Exception) {

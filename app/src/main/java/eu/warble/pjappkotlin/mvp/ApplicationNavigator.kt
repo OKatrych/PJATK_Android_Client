@@ -5,6 +5,7 @@ import com.indoorway.android.common.sdk.model.IndoorwayObjectId
 import eu.warble.pjappkotlin.mvp.list.ListActivity
 import eu.warble.pjappkotlin.mvp.login.LoginActivity
 import eu.warble.pjappkotlin.mvp.main.MainActivity
+import eu.warble.pjappkotlin.mvp.mainguest.MainGuestActivity
 import eu.warble.pjappkotlin.mvp.map.map.MapActivity
 import eu.warble.pjappkotlin.utils.Constants
 
@@ -35,9 +36,8 @@ class ApplicationNavigator(private val baseActivity: BaseActivity) {
     }
 
     fun goToMainActivityWithGuestMode() {
-        val intent = Intent(baseActivity, MainActivity::class.java).apply {
+        val intent = Intent(baseActivity, MainGuestActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra("guestMode", true)
         }
         baseActivity.startActivity(intent)
     }

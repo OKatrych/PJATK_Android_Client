@@ -1,4 +1,4 @@
-package eu.warble.pjappkotlin.mvp.main
+package eu.warble.pjappkotlin.mvp.mainguest
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,49 +12,42 @@ import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
 import eu.warble.pjappkotlin.mvp.ftp.FtpFragment
 import eu.warble.pjappkotlin.mvp.map.list.MapListFragment
+import eu.warble.pjappkotlin.mvp.news.NewsFragment
 import eu.warble.pjappkotlin.mvp.schedule.ScheduleFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.StudentInfoFragment
 import eu.warble.pjappkotlin.utils.Injection
 import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 
-class MainActivity : BaseActivity(),
-                     FragNavController.TransactionListener,
-                     MainContract.View {
+class MainGuestActivity : BaseActivity(),
+                          FragNavController.TransactionListener,
+                          MainGuestContract.View {
 
-    override lateinit var presenter: MainContract.Presenter
+    override lateinit var presenter: MainGuestContract.Presenter
     override val applicationNavigator = ApplicationNavigator(this)
 
-    private val INDEX_STUDENT = FragNavController.TAB1
-    private val INDEX_NEWS = FragNavController.TAB2
-    private val INDEX_SCHEDULE = FragNavController.TAB3
-    private val INDEX_MAP = FragNavController.TAB5
-    private val INDEX_FTP = FragNavController.TAB5
+    private val INDEX_NEWS = FragNavController.TAB1
+    private val INDEX_MAP = FragNavController.TAB2
     private var fragNavController: FragNavController? = null
 
     private val fragments: List<Fragment> = mutableListOf(
-            StudentInfoFragment.newInstance(),
-            ScheduleFragment.newInstance(),
-            MapListFragment.newInstance(),
-            FtpFragment.newInstance(),
-            StudentInfoFragment.newInstance()
+            NewsFragment.newInstance(),
+            MapListFragment.newInstance()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_guest)
         val initial = savedInstanceState == null
         initPresenter()
+
         if (initial) {
-            selectNavigationItem(
-                    R.id.navigation_student
-            )
+            selectNavigationItem(R.id.navigation_news)
         }
         initFragNavController(savedInstanceState)
     }
 
     private fun initPresenter() {
-        presenter = MainPresenter(
-                Injection.provideStudentDataRepository(applicationContext),
+        presenter = MainGuestPresenter(
                 this,
                 applicationContext
         )
@@ -92,14 +85,7 @@ class MainActivity : BaseActivity(),
     }
 
     override fun onTabTransaction(fragment: Fragment?, index: Int) {
-        updateActionBar(index)
-    }
-
-    private fun updateActionBar(index: Int) {
-        when (index) {
-            INDEX_STUDENT, INDEX_SCHEDULE -> supportActionBar?.elevation = 0f
-            else -> supportActionBar?.elevation = 14f
-        }
+        supportActionBar?.elevation = 14f
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -110,14 +96,14 @@ class MainActivity : BaseActivity(),
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater?.inflate(R.menu.toolbar, menu)
+        menuInflater?.inflate(R.menu.toolbar_guest, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.toolbar_logOut -> {
-                presenter.logOut()
+            R.id.toolbar_logIn -> {
+                applicationNavigator.goToLoginActivity()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -126,27 +112,11 @@ class MainActivity : BaseActivity(),
 
     private fun getPosition(fragmentId: Int): Int {
         return when (fragmentId) {
-            R.id.navigation_student -> INDEX_STUDENT
-            R.id.navigation_schedule -> INDEX_SCHEDULE
-            R.id.navigation_maps -> INDEX_MAP
-            R.id.navigation_ftp -> INDEX_FTP
             R.id.navigation_news -> INDEX_NEWS
+            R.id.navigation_maps -> INDEX_MAP
             else -> -1
         }
     }
-
-    override fun showApiError(error: String?) {
-        AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setTitle("PJATK API Error")
-                .setMessage(error ?: "Some problems with PJATK API Server")
-                .setNeutralButton("Refresh") { dialogInterface, _ ->
-                    presenter.checkApiResponseForErrors()
-                    dialogInterface.dismiss()
-                }
-                .show()
-    }
-
 
     override fun onBackPressed() {
         val fragmentsList = supportFragmentManager.fragments
@@ -159,7 +129,7 @@ class MainActivity : BaseActivity(),
                 }
             }
         }
-        if (!handled){
+        if (!handled) {
             super.onBackPressed()
         }
     }

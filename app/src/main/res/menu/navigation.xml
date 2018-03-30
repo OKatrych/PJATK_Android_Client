@@ -7,6 +7,11 @@
         android:title="@string/student" />
 
     <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/newspaper"
+        android:title="@string/more" />
+
+    <item
         android:id="@+id/navigation_schedule"
         android:icon="@drawable/calendar"
         android:title="@string/schedule" />
@@ -19,10 +24,5 @@
     <item
         android:id="@+id/navigation_ftp"
         android:icon="@drawable/network_download"
-        android:title="FTP(Beta)" />
-
-    <item
-        android:id="@+id/navigation_more"
-        android:icon="@drawable/more"
-        android:title="@string/more" />
+        android:title="@string/ftp" />
 </menu>

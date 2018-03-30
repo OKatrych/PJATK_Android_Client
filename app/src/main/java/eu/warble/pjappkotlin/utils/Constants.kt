@@ -27,6 +27,8 @@ object Constants {
 
     val API_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
+    val API_NEWS_JSON = "https://pja-rss.herokuapp.com/?format=json"
+
     object ListActivityAdapterType {
         val PAYMENT = "PAYMENT"
         val RECEIVABLE = "RECEIVABLE"

@@ -15,40 +15,24 @@ class MainPresenter(
         private val appContext: Context
 ) : MainContract.Presenter {
 
-    override var guestModeEnabled: Boolean = false
-
-    /**
-     * Guest mode accessible tabs
-     */
-    override val accessibleTabs: Array<Int> = arrayOf(
-            R.id.navigation_maps,
-            R.id.navigation_more
-    )
-
     override fun start() {
         checkApiResponseForErrors()
     }
 
-    override fun checkTabAccessible(fragmentId: Int): Boolean {
-        return !guestModeEnabled || accessibleTabs.contains(fragmentId)
-    }
-
     override fun checkApiResponseForErrors() {
-        if (!guestModeEnabled) {
-            studentDataRepository?.getStudentData(appContext,
-                    object : StudentDataSource.LoadStudentDataCallback {
-                        override fun onDataLoaded(studentData: Student) {
-                            if (!Tools.checkApiResponseForErrors(studentData)) {
-                                view.showApiError(null)
-                            }
-                        }
-
-                        override fun onDataNotAvailable(error: String) {
-                            view.showApiError(error)
+        studentDataRepository?.getStudentData(appContext,
+                object : StudentDataSource.LoadStudentDataCallback {
+                    override fun onDataLoaded(studentData: Student) {
+                        if (!Tools.checkApiResponseForErrors(studentData)) {
+                            view.showApiError(null)
                         }
                     }
-            )
-        }
+
+                    override fun onDataNotAvailable(error: String) {
+                        view.showApiError(error)
+                    }
+                }
+        )
     }
 
     override fun logOut() {

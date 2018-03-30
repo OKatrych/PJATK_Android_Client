@@ -27,7 +27,6 @@ class StudentInfoFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_student_info, container, false)
-        setHasOptionsMenu(true)
         initTabs(view)
         return view
     }
@@ -36,10 +35,6 @@ class StudentInfoFragment : BaseFragment() {
         val adapter = TabsFragmentAdapter(mContext, childViews, childFragmentManager)
         view.viewPager.adapter = adapter
         view.tabLayout.setupWithViewPager(view.viewPager)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.toolbar, menu)
     }
 
     companion object {
