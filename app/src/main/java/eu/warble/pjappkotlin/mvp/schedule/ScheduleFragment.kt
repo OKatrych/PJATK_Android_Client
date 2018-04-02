@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_schedule.view.loading_screen
 import kotlinx.android.synthetic.main.fragment_schedule.view.schedule_list
 import kotlinx.android.synthetic.main.fragment_schedule.view.week_date_picker
 import org.threeten.bp.LocalDate
-
+import java.util.Calendar
 
 class ScheduleFragment : BaseFragment(), ScheduleContract.View {
 
@@ -94,7 +94,9 @@ class ScheduleFragment : BaseFragment(), ScheduleContract.View {
                 now.year,
                 now.monthValue - 1,
                 now.dayOfMonth
-        ).show()
+        ).apply {
+            datePicker.firstDayOfWeek = Calendar.MONDAY
+        }.show()
     }
 
     override fun updateList(newItems: List<ZajeciaItem>) {

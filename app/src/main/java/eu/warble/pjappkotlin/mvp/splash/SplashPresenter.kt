@@ -21,7 +21,7 @@ class SplashPresenter(
     override fun checkUserLogIn() {
         when {
             studentDataRepository == null -> {
-                view.applicationNavigator.goToLoginActivity()
+                view.goToLoginActivity()
                 return
             }
             isNetworkAvailable() -> {
@@ -30,7 +30,7 @@ class SplashPresenter(
                         appContext,
                         object : StudentDataSource.LoadStudentDataCallback {
                             override fun onDataLoaded(studentData: Student) {
-                                view.applicationNavigator.goToMainActivity()
+                                view.goToMainActivity()
                             }
 
                             override fun onDataNotAvailable(error: String) {
@@ -39,14 +39,14 @@ class SplashPresenter(
                                         view.showConnectionError()
                                     Constants.CREDENTIALS_ERROR -> {
                                         StudentDataRepository.destroyInstance()
-                                        view.applicationNavigator.goToLoginActivity()
+                                        view.goToLoginActivity()
                                     }
                                     else -> view.showError(error)
                                 }
                             }
                         })
             }
-            else -> view.applicationNavigator.goToMainActivityWithNoInternetMode()
+            else -> view.goToMainActivityWithNoInternetMode()
         }
 
     }

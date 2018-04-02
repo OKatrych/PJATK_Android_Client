@@ -10,11 +10,12 @@ interface NewsContract {
     interface View : BaseView<Presenter> {
         val applicationNavigator: ApplicationNavigator
         fun showNewsItems(items: ArrayList<NewsItem>)
-        fun showConnectionError()
+        fun showConnectionError(action: () -> Unit)
+        fun showLoadingScreen(show: Boolean)
     }
 
     interface Presenter : BasePresenter {
         fun isNetworkAvailable(): Boolean
-
+        fun loadNewsData()
     }
 }

@@ -113,6 +113,7 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
         inflater.inflate(R.menu.toolbar, menu)
         searchItem = menu.findItem(R.id.action_search).apply {
             isEnabled = true

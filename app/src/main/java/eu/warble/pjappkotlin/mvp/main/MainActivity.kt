@@ -12,6 +12,7 @@ import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
 import eu.warble.pjappkotlin.mvp.ftp.FtpFragment
 import eu.warble.pjappkotlin.mvp.map.list.MapListFragment
+import eu.warble.pjappkotlin.mvp.news.NewsFragment
 import eu.warble.pjappkotlin.mvp.schedule.ScheduleFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.StudentInfoFragment
 import eu.warble.pjappkotlin.utils.Injection
@@ -27,16 +28,17 @@ class MainActivity : BaseActivity(),
     private val INDEX_STUDENT = FragNavController.TAB1
     private val INDEX_NEWS = FragNavController.TAB2
     private val INDEX_SCHEDULE = FragNavController.TAB3
-    private val INDEX_MAP = FragNavController.TAB5
+    private val INDEX_MAP = FragNavController.TAB4
     private val INDEX_FTP = FragNavController.TAB5
+
     private var fragNavController: FragNavController? = null
 
     private val fragments: List<Fragment> = mutableListOf(
             StudentInfoFragment.newInstance(),
+            NewsFragment.newInstance(),
             ScheduleFragment.newInstance(),
             MapListFragment.newInstance(),
-            FtpFragment.newInstance(),
-            StudentInfoFragment.newInstance()
+            FtpFragment.newInstance()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

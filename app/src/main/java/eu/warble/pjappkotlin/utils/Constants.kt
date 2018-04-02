@@ -29,6 +29,11 @@ object Constants {
 
     val API_NEWS_JSON = "https://pja-rss.herokuapp.com/?format=json"
 
+    val PJATK_SITE = "https://pja.edu.pl"
+    val PJATK_FB_SITE = "https://facebook.com/polskojaponska"
+    val PJATK_INSTAGRAM_SITE = "https://instagram.com/polskojaponska"
+    val PJATK_MYKHI_SITE = "https://pja.mykhi.org"
+
     object ListActivityAdapterType {
         val PAYMENT = "PAYMENT"
         val RECEIVABLE = "RECEIVABLE"

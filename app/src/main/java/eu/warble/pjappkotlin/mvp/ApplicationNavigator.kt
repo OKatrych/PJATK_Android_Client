@@ -1,6 +1,7 @@
 package eu.warble.pjappkotlin.mvp
 
 import android.content.Intent
+import android.net.Uri
 import com.indoorway.android.common.sdk.model.IndoorwayObjectId
 import eu.warble.pjappkotlin.mvp.list.ListActivity
 import eu.warble.pjappkotlin.mvp.login.LoginActivity
@@ -17,13 +18,13 @@ class ApplicationNavigator(private val baseActivity: BaseActivity) {
 
     fun goToLoginActivity() {
         val intent = Intent(baseActivity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         baseActivity.startActivity(intent)
     }
 
     fun goToMainActivity() {
         val intent = Intent(baseActivity, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         baseActivity.startActivity(intent)
     }
 
@@ -49,7 +50,6 @@ class ApplicationNavigator(private val baseActivity: BaseActivity) {
         baseActivity.startActivity(intent)
     }
 
-
     /**
      * Use when need to load specific map
      */
@@ -68,5 +68,15 @@ class ApplicationNavigator(private val baseActivity: BaseActivity) {
     fun goToMapActivity() {
         val intent = Intent(baseActivity, MapActivity::class.java)
         baseActivity.startActivity(intent)
+    }
+
+    fun openWebPage(url: String?) {
+        val page = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, page)
+        if (intent.resolveActivity(baseActivity.packageManager) != null) {
+            baseActivity.startActivity(intent)
+        } else {
+            baseActivity.showError("No app to open web page available.")
+        }
     }
 }

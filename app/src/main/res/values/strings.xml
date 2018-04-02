@@ -120,7 +120,6 @@
     <string name="login_login_field_blank">Login cannot be blank</string>
     <string name="login_password_field_blank">Password cannot be blank</string>
 
-
     <!-- Days of week -->
     <string name="monday">Mon</string>
     <string name="tuesday">Tue</string>
@@ -132,4 +131,8 @@
     <string name="download_start">Downloading started</string>
     <string name="determining_location">Determining location</string>
     <string name="error_map_load_failed">Map loading failed</string>
+    <string name="pjatk_facebook">PJATK Facebook</string>
+    <string name="pjatk_instagram">PJATK Instagram</string>
+    <string name="mykhi">Mykhi</string>
+    <string name="news">News</string>
 </resources>
