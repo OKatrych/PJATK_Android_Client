@@ -6,6 +6,8 @@ import org.threeten.bp.format.DateTimeFormatter
 object Constants {
     val PJAPP_PREFS = "Pjapp-prefs"
 
+    val EMPTY_STRING = ""
+
     val CREDENTIALS_ERROR = "CREDENTIALS_ERROR"
     val CONNECTION_ERROR = "CONNECTION_ERROR"
     val UNKNOWN_ERROR = "UNKNOWN_ERROR"
@@ -24,6 +26,13 @@ object Constants {
             "https://ws.pjwstk.edu.pl/test/Service.svc/XmlService/tester"
 
     val API_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+    val API_NEWS_JSON = "https://pja-rss.herokuapp.com/?format=json"
+
+    val PJATK_SITE = "https://pja.edu.pl"
+    val PJATK_FB_SITE = "https://facebook.com/polskojaponska"
+    val PJATK_INSTAGRAM_SITE = "https://instagram.com/polskojaponska"
+    val PJATK_MYKHI_SITE = "https://pja.mykhi.org"
 
     object ListActivityAdapterType {
         val PAYMENT = "PAYMENT"

@@ -1,12 +1,14 @@
 package eu.warble.pjappkotlin.mvp.login
 
 import android.os.Bundle
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
+import kotlinx.android.synthetic.main.activity_login.loading_screen
 import kotlinx.android.synthetic.main.activity_login.login
 import kotlinx.android.synthetic.main.activity_login.loginBtn
 import kotlinx.android.synthetic.main.activity_login.loginGuestBtn
@@ -48,15 +50,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     }
 
     override fun showLoading(show: Boolean) {
-        val animation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f).apply {
-            interpolator = LinearInterpolator()
-            duration = 900
-            repeatCount = Animation.INFINITE
-        }
-        if (show)
-            pja_logo.startAnimation(animation)
-        else
-            pja_logo.clearAnimation()
+        loading_screen.visibility = if (show) View.VISIBLE else View.GONE
         loginGuestBtn.isEnabled = !show
         loginBtn.isEnabled = !show
     }

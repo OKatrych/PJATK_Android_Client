@@ -15,17 +15,38 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun showError(error: String) {
-        if (activity != null)
-            (activity as BaseActivity).showError(error)
+        if (activity != null) (activity as BaseActivity).showError(error)
     }
 
     fun showError(error: Int) {
-        if (activity != null)
-            (activity as BaseActivity).showError(error)
+        if (activity != null) (activity as BaseActivity).showError(error)
+    }
+
+    fun showErrorWithAction(error: String, actionText: String, action: () -> Unit) {
+        if (activity != null) (activity as BaseActivity).showErrorWithAction(error, actionText, action)
+    }
+
+    fun showErrorWithAction(error: Int, actionText: Int, action: () -> Unit) {
+        if (activity != null) (activity as BaseActivity).showErrorWithAction(error, actionText, action)
     }
 
     fun showMessage(message: String) {
-        if (activity != null)
-            (activity as BaseActivity).showMessage(message)
+        if (activity != null) (activity as BaseActivity).showMessage(message)
+    }
+
+    fun showMessage(message: Int) {
+        if (activity != null) (activity as BaseActivity).showMessage(message)
+    }
+
+    fun showMessageWithAction(message: String, actionText: String, action: () -> Unit) {
+        if (activity != null) (activity as BaseActivity).showMessageWithAction(message, actionText, action)
+    }
+
+    fun showMessageWithAction(message: Int, actionText: Int, action: () -> Unit) {
+        if (activity != null) (activity as BaseActivity).showMessageWithAction(message, actionText, action)
+    }
+
+    open fun onBack(): Boolean {
+        return false
     }
 }

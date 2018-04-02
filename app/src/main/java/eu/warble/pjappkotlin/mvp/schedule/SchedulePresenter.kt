@@ -30,7 +30,7 @@ class SchedulePresenter(
         scheduleDataRepository?.getScheduleData(appContext, from, to, object : ScheduleDataSource.LoadScheduleDataCallback {
             override fun onDataLoaded(scheduleData: List<ZajeciaItem>) {
                 view.showLoadingScreen(false)
-                showSchedule(day, from, to, scheduleData)
+                showSchedule(day, scheduleData)
             }
 
             override fun onDataNotAvailable(error: String) {
@@ -40,7 +40,7 @@ class SchedulePresenter(
         })
     }
 
-    private fun showSchedule(selectedDay: LocalDate, from: LocalDate, to: LocalDate, scheduleData: List<ZajeciaItem>) {
+    private fun showSchedule(selectedDay: LocalDate, scheduleData: List<ZajeciaItem>) {
         val datePicker = view.datePicker
         val scheduleManager = ScheduleManager(scheduleData)
         datePicker.setOnDateSelectedListener(object : WeekDatePicker.OnDaySelectedListener {

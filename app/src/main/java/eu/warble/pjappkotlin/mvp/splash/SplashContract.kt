@@ -8,8 +8,10 @@ import eu.warble.pjappkotlin.mvp.BaseView
 interface SplashContract {
 
     interface View : BaseView<Presenter> {
-        val applicationNavigator: ApplicationNavigator
         fun showConnectionError()
+        fun goToLoginActivity()
+        fun goToMainActivity()
+        fun goToMainActivityWithNoInternetMode()
     }
 
     interface Presenter : BasePresenter {

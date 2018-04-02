@@ -2,6 +2,7 @@ package eu.warble.pjappkotlin.utils
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import eu.warble.pjappkotlin.data.model.NewsItem
 import eu.warble.pjappkotlin.data.model.Student
 import eu.warble.pjappkotlin.data.model.ZajeciaItem
 import okhttp3.ResponseBody
@@ -27,6 +28,14 @@ object Converter {
     fun jsonStringToScheduleList(json: String?): List<ZajeciaItem>? {
         if (json != null) {
             val listType = object : TypeToken<List<ZajeciaItem>>() {}.type
+            return Gson().fromJson(json, listType)
+        }
+        return null
+    }
+
+    fun jsonStringToNewsList(json: String?): ArrayList<NewsItem>? {
+        if (json != null) {
+            val listType = object : TypeToken<ArrayList<NewsItem>>() {}.type
             return Gson().fromJson(json, listType)
         }
         return null

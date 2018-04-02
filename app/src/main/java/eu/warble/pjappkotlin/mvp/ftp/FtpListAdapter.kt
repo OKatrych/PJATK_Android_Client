@@ -1,6 +1,5 @@
 package eu.warble.pjappkotlin.mvp.ftp
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,8 @@ import kotlinx.android.synthetic.main.list_item_ftp.view.file_image
 import kotlinx.android.synthetic.main.list_item_ftp.view.file_name
 
 class FtpListAdapter(
-        private val context: Context?,
-        ftpData: List<GetterFile>
+        ftpData: List<GetterFile>,
+        private val onItemClick: (GetterFile) -> Unit
 ) : RecyclerView.Adapter<FtpListAdapter.ViewHolder>(), Filterable {
 
     private var items = ArrayList<GetterFile>(ftpData)
@@ -39,11 +38,11 @@ class FtpListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(displayedItems[position])
+        holder.bind(displayedItems[position], onItemClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.list_item_schedule))
+        return ViewHolder(parent.inflate(R.layout.list_item_ftp))
     }
 
     private fun getFileIcon(fileName: String): Int {
@@ -93,15 +92,19 @@ class FtpListAdapter(
         private val date: TextView = itemView.file_editing_date
         private val icon: ImageView = itemView.file_image
 
-        fun bind(file: GetterFile) = with(itemView) {
-            if (file.isDirectory()) {
-                icon.setImageResource(R.drawable.folder)
-            } else {
-                icon.setImageResource(getFileIcon(file.name))
+        fun bind(file: GetterFile, onItemClick: (GetterFile) -> Unit) {
+            with(itemView) {
+                if (file.isDirectory()) {
+                    icon.setImageResource(R.drawable.folder)
+                } else {
+                    icon.setImageResource(getFileIcon(file.name))
+                }
+                fileName.text = file.name
+                date.text = file.lsEntry.attrs.mtimeString
+                itemView.setOnClickListener {
+                    onItemClick(file)
+                }
             }
-            fileName.text = file.name
-            date.text = file.lsEntry.attrs.mtimeString
         }
     }
-
 }

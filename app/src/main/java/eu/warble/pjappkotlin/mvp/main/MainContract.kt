@@ -13,9 +13,6 @@ interface MainContract {
     }
 
     interface Presenter : BasePresenter {
-        var guestModeEnabled: Boolean
-        val accessibleTabs: Array<Int>
-        fun checkTabAccessible(fragmentId: Int): Boolean
         fun checkApiResponseForErrors()
         fun logOut()
     }

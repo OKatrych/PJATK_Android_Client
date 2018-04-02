@@ -3,11 +3,16 @@ package eu.warble.pjappkotlin.mvp.main
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.view.Menu
 import android.view.MenuItem
 import com.ncapdevi.fragnav.FragNavController
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
+import eu.warble.pjappkotlin.mvp.BaseFragment
+import eu.warble.pjappkotlin.mvp.ftp.FtpFragment
+import eu.warble.pjappkotlin.mvp.map.list.MapListFragment
+import eu.warble.pjappkotlin.mvp.news.NewsFragment
 import eu.warble.pjappkotlin.mvp.schedule.ScheduleFragment
 import eu.warble.pjappkotlin.mvp.studentinfo.StudentInfoFragment
 import eu.warble.pjappkotlin.utils.Injection
@@ -15,45 +20,46 @@ import kotlinx.android.synthetic.main.activity_main.bottomNavigationView
 
 class MainActivity : BaseActivity(),
                      FragNavController.TransactionListener,
-                     FragNavController.RootFragmentListener,
                      MainContract.View {
 
     override lateinit var presenter: MainContract.Presenter
     override val applicationNavigator = ApplicationNavigator(this)
 
     private val INDEX_STUDENT = FragNavController.TAB1
-    private val INDEX_SCHEDULE = FragNavController.TAB2
-    private val INDEX_MAP = FragNavController.TAB3
-    private val INDEX_FTP = FragNavController.TAB4
-    private val INDEX_MORE = FragNavController.TAB5
+    private val INDEX_NEWS = FragNavController.TAB2
+    private val INDEX_SCHEDULE = FragNavController.TAB3
+    private val INDEX_MAP = FragNavController.TAB4
+    private val INDEX_FTP = FragNavController.TAB5
 
     private var fragNavController: FragNavController? = null
+
+    private val fragments: List<Fragment> = mutableListOf(
+            StudentInfoFragment.newInstance(),
+            NewsFragment.newInstance(),
+            ScheduleFragment.newInstance(),
+            MapListFragment.newInstance(),
+            FtpFragment.newInstance()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val initial = savedInstanceState == null
-        val guestModeEnabled = intent.getBooleanExtra("guestMode", false)
-        initPresenter(guestModeEnabled)
+        initPresenter()
         if (initial) {
             selectNavigationItem(
-                    if (guestModeEnabled)
-                        presenter.accessibleTabs[0]
-                    else
-                        R.id.navigation_student
+                    R.id.navigation_student
             )
         }
         initFragNavController(savedInstanceState)
     }
 
-    private fun initPresenter(guestModeEnabled: Boolean) {
+    private fun initPresenter() {
         presenter = MainPresenter(
                 Injection.provideStudentDataRepository(applicationContext),
                 this,
                 applicationContext
-        ).apply {
-            this.guestModeEnabled = guestModeEnabled
-        }
+        )
     }
 
     override fun onResume() {
@@ -68,18 +74,13 @@ class MainActivity : BaseActivity(),
                 R.id.main_content
         )
                 .transactionListener(this)
-                .rootFragmentListener(this, 5)
+                .rootFragments(fragments)
                 .switchController { id, _ -> bottomNavigationView.selectedItemId = id }
                 .build()
         fragNavController?.executePendingTransactions()
         bottomNavigationView.setOnNavigationItemSelectedListener({ item ->
-            if (presenter.checkTabAccessible(item.itemId)) {
-                fragNavController?.switchTab(getPosition(item.itemId))
-                true
-            } else {
-                applicationNavigator.goToLoginActivity()
-                false
-            }
+            fragNavController?.switchTab(getPosition(item.itemId))
+            true
         })
         bottomNavigationView.setOnNavigationItemReselectedListener({ fragNavController?.clearStack() })
     }
@@ -96,17 +97,6 @@ class MainActivity : BaseActivity(),
         updateActionBar(index)
     }
 
-    override fun getRootFragment(index: Int): Fragment {
-        return when (index) {
-            INDEX_STUDENT -> StudentInfoFragment.newInstance()
-            INDEX_SCHEDULE -> ScheduleFragment.newInstance()
-            INDEX_MAP -> StudentInfoFragment.newInstance()
-            INDEX_FTP -> StudentInfoFragment.newInstance()
-            INDEX_MORE -> StudentInfoFragment.newInstance()
-            else -> throw IllegalStateException("Need to send an index that we know")
-        }
-    }
-
     private fun updateActionBar(index: Int) {
         when (index) {
             INDEX_STUDENT, INDEX_SCHEDULE -> supportActionBar?.elevation = 0f
@@ -119,6 +109,11 @@ class MainActivity : BaseActivity(),
         outState?.let {
             fragNavController?.onSaveInstanceState(outState)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater?.inflate(R.menu.toolbar, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -137,7 +132,7 @@ class MainActivity : BaseActivity(),
             R.id.navigation_schedule -> INDEX_SCHEDULE
             R.id.navigation_maps -> INDEX_MAP
             R.id.navigation_ftp -> INDEX_FTP
-            R.id.navigation_more -> INDEX_MORE
+            R.id.navigation_news -> INDEX_NEWS
             else -> -1
         }
     }
@@ -152,5 +147,22 @@ class MainActivity : BaseActivity(),
                     dialogInterface.dismiss()
                 }
                 .show()
+    }
+
+
+    override fun onBackPressed() {
+        val fragmentsList = supportFragmentManager.fragments
+        var handled = false
+        fragmentsList.forEach {
+            if (it is BaseFragment) {
+                handled = it.onBack()
+                if (handled) {
+                    return@forEach
+                }
+            }
+        }
+        if (!handled){
+            super.onBackPressed()
+        }
     }
 }
