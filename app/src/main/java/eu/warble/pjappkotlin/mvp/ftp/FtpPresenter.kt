@@ -67,6 +67,8 @@ class FtpPresenter(
         }
     }
 
+
+
     override fun downloadFile(file: GetterFile) {
         if (NetworkUtil.isNetworkAvailable(appContext)) {
             val notification = NotificationManager.createDownloadFileNotification(
@@ -119,6 +121,10 @@ class FtpPresenter(
             view.showLoadingScreen(false)
             view.showError(R.string.connect_error)
         }
+    }
+
+    override fun reload() {
+        loadDirectory(Getter.currentPath)
     }
 
     override fun onBack(): Boolean {
