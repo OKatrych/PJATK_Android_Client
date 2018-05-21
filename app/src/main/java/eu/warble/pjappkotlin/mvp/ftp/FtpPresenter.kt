@@ -113,4 +113,12 @@ class FtpPresenter(
             view.showError(R.string.connect_error)
         }
     }
+
+    override fun onBack(): Boolean {
+        if (Getter.currentPath != "/") {
+            loadDirectory("..")
+            return true
+        }
+        return false
+    }
 }
