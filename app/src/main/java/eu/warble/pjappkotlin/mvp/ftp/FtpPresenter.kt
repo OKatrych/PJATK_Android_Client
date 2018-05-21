@@ -77,9 +77,16 @@ class FtpPresenter(
 
             Getter.download(file, object : DownloadCallback {
 
+                var prevProgress = 0
+
                 override fun onProgressChanged(percent: Int) {
-                    notification.setProgress(100, percent, false)
-                    NotificationManager.updateDownloadNotification(appContext, notification)
+                    when (percent) {
+                        prevProgress + 5 -> {
+                            notification.setProgress(100, percent, false)
+                            NotificationManager.updateDownloadNotification(appContext, notification)
+                            prevProgress = percent
+                        }
+                    }
                 }
 
                 override fun onFinish(destination: String) {
