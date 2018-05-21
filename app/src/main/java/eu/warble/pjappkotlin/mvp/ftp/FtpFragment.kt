@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -21,11 +22,11 @@ import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
 import eu.warble.pjappkotlin.utils.Injection
 import kotlinx.android.synthetic.main.fragment_ftp.view.directories_list
-import kotlinx.android.synthetic.main.fragment_ftp.view.loading_screen
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnShowRationale
 import permissions.dispatcher.PermissionRequest
 import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_ftp.view.swipe_refresh_layout
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
 
@@ -37,10 +38,10 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
     override val applicationNavigator: ApplicationNavigator by lazy {
         ApplicationNavigator(activity as BaseActivity)
     }
-    private lateinit var loadingScreen: View
     private lateinit var directoriesList: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_ftp, container, false)
@@ -52,7 +53,6 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
     }
 
     private fun initViews(view: View) {
-        loadingScreen = view.loading_screen
         directoriesList = view.directories_list
         directoriesList.layoutManager = LinearLayoutManager(directoriesList.context)
         directoriesList.adapter = FtpListAdapter(
@@ -67,10 +67,11 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
                     }
                 }
         )
+        initSwipeRefresh(view)
     }
 
     override fun showLoadingScreen(show: Boolean) {
-        loadingScreen.visibility = if (show) View.VISIBLE else View.GONE
+        swipeRefreshLayout.isRefreshing = show
     }
 
     override fun updateDirectoriesList(newData: ArrayList<GetterFile>) {
@@ -124,7 +125,7 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
-        if (loadingScreen.visibility == View.GONE)
+        if (!swipeRefreshLayout.isRefreshing)
             (directoriesList.adapter as FtpListAdapter).filter.filter(newText)
         return true
     }
@@ -135,6 +136,13 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
 
     override fun onBack(): Boolean {
         return presenter.onBack()
+    }
+
+    private fun initSwipeRefresh(view: View) {
+        swipeRefreshLayout = view.swipe_refresh_layout
+        swipeRefreshLayout.setOnRefreshListener {
+            presenter.reload()
+        }
     }
 
     companion object {
