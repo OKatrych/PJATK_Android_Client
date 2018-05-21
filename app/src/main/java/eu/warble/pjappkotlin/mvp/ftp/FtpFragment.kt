@@ -133,6 +133,10 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
         return true
     }
 
+    override fun onBack(): Boolean {
+        return presenter.onBack()
+    }
+
     companion object {
         fun newInstance() = FtpFragment()
     }

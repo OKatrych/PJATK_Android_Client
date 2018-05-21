@@ -15,5 +15,6 @@ interface FtpContact {
     interface Presenter : BasePresenter {
         fun loadDirectory(path: String)
         fun downloadFile(file: GetterFile)
+        fun onBack(): Boolean
     }
 }
