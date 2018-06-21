@@ -8,6 +8,7 @@ import com.indoorway.android.location.sdk.IndoorwayLocationSdk
 import com.indoorway.android.location.sdk.model.IndoorwayLocationSdkError
 import com.indoorway.android.location.sdk.model.IndoorwayLocationSdkState
 import com.indoorway.android.map.sdk.listeners.OnObjectSelectedListener
+import eu.warble.pjappkotlin.Application
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.data.StudentDataRepository
 
@@ -18,6 +19,7 @@ class MapPresenter(
 
     private var needToFindLocation = false
     private var isLocationDetermined = false
+    private var lastPosition: IndoorwayPosition? = null
 
     override fun start() {
         //no-op
@@ -66,11 +68,33 @@ class MapPresenter(
     }
 
     private val positionChangeListener = Action1<IndoorwayPosition> {
-        if (!isLocationDetermined) {
-            onLocationDetermined(it)
-        } else {
-            view.printCurrentPosition(it)
+        when {
+            !isLocationDetermined -> onLocationDetermined(it)
+            !didFlourChanged(it) -> view.printCurrentPosition(it)
+            else -> {
+                //if flour changed, we need to restart whole Indoorway service due to bugs when changing flour
+                restartIndoorwayService()
+            }
         }
+    }
+
+    private fun restartIndoorwayService() {
+        isLocationDetermined = false
+        onPause()  // unregister listeners
+        Application.restartIndoorway()
+        findLocationAndLoadMap()
+    }
+
+    private fun didFlourChanged(
+            currentPosition: IndoorwayPosition?
+    ): Boolean {
+        var result = false
+        val lastPosition = this.lastPosition
+        if (lastPosition != null && currentPosition != null) {
+            result = lastPosition.mapUuid != currentPosition.mapUuid
+        }
+        this.lastPosition = currentPosition
+        return result
     }
 
     private val stateChangeListener = Action1<IndoorwayLocationSdkState> {
@@ -92,14 +116,14 @@ class MapPresenter(
                 view.showError("MissingPermissions")
             }
             IndoorwayLocationSdkError.BluetoothDisabled -> {
-                view.showMessageWithAction("Pls enable bluetooth", "Retry", {
+                view.showMessageWithAction("Pls enable bluetooth", "Retry") {
                     findLocationAndLoadMap()
-                })
+                }
             }
             IndoorwayLocationSdkError.LocationDisabled -> {
-                view.showMessageWithAction("Pls enable location service", "Retry", {
+                view.showMessageWithAction("Pls enable location service", "Retry") {
                     findLocationAndLoadMap()
-                })
+                }
             }
             IndoorwayLocationSdkError.UnableToFetchData -> {
                 view.showError("Network-related error, service will be restarted on network connection established")

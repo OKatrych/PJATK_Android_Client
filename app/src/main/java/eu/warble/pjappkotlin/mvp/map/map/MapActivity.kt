@@ -83,7 +83,8 @@ class MapActivity : BaseActivity(), MapContract.View {
     }
 
     override fun printCurrentPosition(position: IndoorwayPosition) {
-        mapView.position.setPosition(position, true)
+        mapView.position.clearPosition()
+        mapView.position.setPosition(position, false)
     }
 
     override fun showLoadingScreen(show: Boolean) {
