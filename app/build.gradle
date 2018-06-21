@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'org.samba.jcifs:jcifs:1.3.14-kohsuke-1' // NTLM library
     implementation 'com.google.code.gson:gson:2.8.3'
@@ -39,9 +39,9 @@ dependencies {
     implementation 'com.github.Warble98:Getter:0.1.6'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'
-    implementation 'com.indoorway.android:common:2.0.7'
-    implementation 'com.indoorway.android:map:2.0.7'
-    implementation 'com.indoorway.android:location:2.0.7'
-    implementation 'com.indoorway.android:fragments:2.0.7'
+    implementation 'com.indoorway.android:common:2.0.19'
+    implementation 'com.indoorway.android:map:2.0.19'
+    implementation 'com.indoorway.android:location:2.0.19'
+    implementation 'com.indoorway.android:fragments:2.0.19'
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
 }
