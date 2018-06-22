@@ -16,11 +16,11 @@ object FileManager {
         val uri: Uri = if (Build.VERSION.SDK_INT >= 24)
             FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider", File(location))
         else
-            Uri.parse("file:///" + location)
+            Uri.parse("file:///$location")
         val type = getType(uri)
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(uri, type)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_CLEAR_TOP
         val manager = context.packageManager
         val infos = manager.queryIntentActivities(intent, 0)
         return if (infos.size > 0) {

@@ -32,14 +32,13 @@ class FtpPresenter(
                         Credentials(login, password),
                         onSuccess = {
                             loadDirectory("/")
-                        },
-                        onFailure = {
-                            view.showErrorWithAction(R.string.connect_error, R.string.retry, {
-                                start()
-                            })
-                            Log.e("Getter", it.message)
                         }
-                )
+                ) {
+                    view.showErrorWithAction(R.string.connect_error, R.string.retry) {
+                        start()
+                    }
+                    Log.e("Getter", it.message)
+                }
             } else {
                 view.showError("Credentials are null")
             }
