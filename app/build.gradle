@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.3'
     implementation 'com.ncapdevi:frag-nav:2.4.0'
     implementation 'com.github.Warble98:Getter:0.1.6'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
     implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'
     implementation 'com.indoorway.android:common:2.0.19'
     implementation 'com.indoorway.android:map:2.0.19'
