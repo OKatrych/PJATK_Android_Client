@@ -1,7 +1,6 @@
 package eu.warble.pjappkotlin
 
 import android.app.Application
-import android.content.Context
 import com.indoorway.android.common.sdk.IndoorwaySdk
 import com.jakewharton.threetenabp.AndroidThreeTen
 import eu.warble.pjappkotlin.utils.Constants
