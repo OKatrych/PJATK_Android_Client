@@ -96,8 +96,8 @@ class FtpFragment : BaseFragment(), FtpContact.View, SearchView.OnQueryTextListe
     fun showRationaleForStorage(request: PermissionRequest) {
         AlertDialog.Builder(mContext as Context)
                 .setMessage(R.string.permission_rationale_storage_message)
-                .setPositiveButton(R.string.button_allow, { _, _ -> request.proceed() })
-                .setNegativeButton(R.string.button_deny, { _, _ -> request.cancel() })
+                .setPositiveButton(R.string.button_allow) { _, _ -> request.proceed() }
+                .setNegativeButton(R.string.button_deny) { _, _ -> request.cancel() }
                 .setCancelable(false)
                 .show()
     }

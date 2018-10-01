@@ -61,7 +61,7 @@ class ScheduleFragment : BaseFragment(), ScheduleContract.View {
         scheduleList.adapter = ScheduleListAdapter(mContext, emptyList())
         scheduleList.invalidate()
         scheduleList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 when {
                     dy > 0 -> calendarFAB.hide()
                     dy < 0 -> calendarFAB.show()
@@ -109,7 +109,7 @@ class ScheduleFragment : BaseFragment(), ScheduleContract.View {
     }
 
     override fun showLoadingScreen(show: Boolean) {
-        calendarFAB.visibility = if (show) View.GONE else View.VISIBLE
+        if (show) calendarFAB.hide() else calendarFAB.show()
         loadingScreen.visibility = if (show) View.VISIBLE else View.GONE
     }
 
