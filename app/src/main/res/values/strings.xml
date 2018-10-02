@@ -38,7 +38,7 @@
     <string name="tab_student_info">Information</string>
     <string name="tab_student_fees">Fees</string>
     <string name="tab_student_marks">Marks</string>
-    <string name="average_point">Average point</string>
+    <string name="average_point">Average grade</string>
     <string name="studies">Studies</string>
     <string name="year">Year</string>
     <string name="semester">Semester</string>
@@ -73,7 +73,6 @@
     <string name="number_instalment">Number of an instalment</string>
     <string name="total_number_of_instalments">Total number of instalments</string>
     <string name="due_date">Due date</string>
-    <string name="about_description">This application is not official PJATK app. Developed by student of 2nd year Information technology. I would appreciate any suggestions and assistance.</string>
     <string name="about">About app</string>
     <string name="about_connect">Connect with us</string>
     <string name="app_ver_number" translatable="false">Beta 1</string>
