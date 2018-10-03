@@ -33,7 +33,7 @@
     <string name="permissions_message2">Aby zapisać pobrane pliki, aplikacja potrzebuje dostępu do pamięci.</string>
     <string name="choose_lang">Wybierz język</string>
     <string name="tab_student_info">Informacja</string>
-    <string name="tab_student_fees">Olpłaty</string>
+    <string name="tab_student_fees">Opłaty</string>
     <string name="tab_student_marks">Oceny</string>
     <string name="average_point">Średnia ocena</string>
     <string name="studies">Wydział</string>
