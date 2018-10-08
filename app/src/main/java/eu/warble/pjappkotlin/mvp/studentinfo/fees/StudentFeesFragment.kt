@@ -11,23 +11,12 @@ import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
 import eu.warble.pjappkotlin.utils.Constants
 import eu.warble.pjappkotlin.utils.Injection
-import kotlinx.android.synthetic.main.card_account.account
-import kotlinx.android.synthetic.main.card_balance.balance
-import kotlinx.android.synthetic.main.card_balance.balance_payments
-import kotlinx.android.synthetic.main.card_balance.balance_receivables
-import kotlinx.android.synthetic.main.card_balance.balance_withdrawals
-import kotlinx.android.synthetic.main.card_payments.payments_date1
-import kotlinx.android.synthetic.main.card_payments.payments_date1_amount
-import kotlinx.android.synthetic.main.card_payments.payments_date2
-import kotlinx.android.synthetic.main.card_payments.payments_date2_amount
-import kotlinx.android.synthetic.main.card_payments.view.btn_payments_history
-import kotlinx.android.synthetic.main.card_receivables.receivables_item1
-import kotlinx.android.synthetic.main.card_receivables.receivables_item1_amount
-import kotlinx.android.synthetic.main.card_receivables.receivables_item1_date
-import kotlinx.android.synthetic.main.card_receivables.receivables_item2
-import kotlinx.android.synthetic.main.card_receivables.receivables_item2_amount
-import kotlinx.android.synthetic.main.card_receivables.receivables_item2_date
-import kotlinx.android.synthetic.main.card_receivables.view.btn_receivables_history
+import kotlinx.android.synthetic.main.card_account.*
+import kotlinx.android.synthetic.main.card_balance.*
+import kotlinx.android.synthetic.main.card_payments.*
+import kotlinx.android.synthetic.main.card_payments.view.*
+import kotlinx.android.synthetic.main.card_receivables.*
+import kotlinx.android.synthetic.main.card_receivables.view.*
 
 class StudentFeesFragment : BaseFragment(), StudentFeesContract.View{
 
@@ -69,19 +58,19 @@ class StudentFeesFragment : BaseFragment(), StudentFeesContract.View{
     }
 
     override fun setBalance(balance: String?) {
-        this.balance.text = balance
+        this.balance.text = balance ?: "0"
     }
 
     override fun setBalanceReceivables(balanceReceivables: String?) {
-        this.balance_receivables.text = balanceReceivables
+        this.balance_receivables.text = balanceReceivables ?: "0"
     }
 
     override fun setBalancePayments(balancePayments: String?) {
-        this.balance_payments.text = balancePayments
+        this.balance_payments.text = balancePayments ?: "0"
     }
 
     override fun setBalanceWithdrawals(balanceWithdrawals: String?) {
-        this.balance_withdrawals.text = balanceWithdrawals
+        this.balance_withdrawals.text = balanceWithdrawals ?: "0"
     }
 
     override fun setPaymentsDate1(paymentsDate1: String?) {
