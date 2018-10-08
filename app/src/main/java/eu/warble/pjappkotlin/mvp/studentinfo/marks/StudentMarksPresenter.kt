@@ -49,9 +49,14 @@ class StudentMarksPresenter(
                 }
             }
             //avg marks card
-            studentData.studia?.get(0)?.let {
-                setAverageYear(it.sredniaRok.toString())
-                setAverageStudies(it.sredniaStudia.toString())
+            if(studentData.studia?.isNotEmpty() == true) {
+                studentData.studia[0].let {
+                    setAverageYear(it.sredniaRok.toString())
+                    setAverageStudies(it.sredniaStudia.toString())
+                }
+            } else {
+                setAverageYear("0")
+                setAverageStudies("0")
             }
         }
     }
