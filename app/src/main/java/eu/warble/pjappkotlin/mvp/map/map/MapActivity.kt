@@ -10,19 +10,13 @@ import com.indoorway.android.common.sdk.listeners.generic.Action0
 import com.indoorway.android.common.sdk.listeners.generic.Action1
 import com.indoorway.android.common.sdk.model.IndoorwayMap
 import com.indoorway.android.common.sdk.model.IndoorwayPosition
-import com.indoorway.android.map.sdk.listeners.OnObjectSelectedListener
+import com.indoorway.android.map.sdk.listeners.OnRoomSelectedListener
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.utils.Injection
-import kotlinx.android.synthetic.main.activity_map.determining_loc_text
-import kotlinx.android.synthetic.main.activity_map.loading_screen
-import kotlinx.android.synthetic.main.activity_map.map_view
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.OnPermissionDenied
-import permissions.dispatcher.OnShowRationale
-import permissions.dispatcher.PermissionRequest
-import permissions.dispatcher.RuntimePermissions
+import kotlinx.android.synthetic.main.activity_map.*
+import permissions.dispatcher.*
 
 @RuntimePermissions
 class MapActivity : BaseActivity(), MapContract.View {
@@ -65,11 +59,11 @@ class MapActivity : BaseActivity(), MapContract.View {
                          mapUUID: String,
                          onMapLoadCompletedListener: Action1<IndoorwayMap>,
                          onMapLoadFailedListener: Action0,
-                         onObjectSelectedListener: OnObjectSelectedListener
+                         onRoomSelectedListener: OnRoomSelectedListener
     ) {
         mapView.onMapLoadCompletedListener = onMapLoadCompletedListener
         mapView.onMapLoadFailedListener = onMapLoadFailedListener
-        mapView.selection.onObjectSelectedListener = onObjectSelectedListener
+        mapView.selection.onRoomSelectedListener = onRoomSelectedListener
         mapView.load(buildingUUID, mapUUID)
     }
 

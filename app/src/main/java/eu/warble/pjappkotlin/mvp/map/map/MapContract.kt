@@ -4,7 +4,7 @@ import com.indoorway.android.common.sdk.listeners.generic.Action0
 import com.indoorway.android.common.sdk.listeners.generic.Action1
 import com.indoorway.android.common.sdk.model.IndoorwayMap
 import com.indoorway.android.common.sdk.model.IndoorwayPosition
-import com.indoorway.android.map.sdk.listeners.OnObjectSelectedListener
+import com.indoorway.android.map.sdk.listeners.OnRoomSelectedListener
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BasePresenter
 import eu.warble.pjappkotlin.mvp.BaseView
@@ -18,7 +18,7 @@ interface MapContract {
                     mapUUID: String,
                     onMapLoadCompletedListener: Action1<IndoorwayMap>,
                     onMapLoadFailedListener: Action0,
-                    onObjectSelectedListener: OnObjectSelectedListener
+                    onRoomSelectedListener: OnRoomSelectedListener
         )
 
         fun printCurrentPosition(position: IndoorwayPosition)
