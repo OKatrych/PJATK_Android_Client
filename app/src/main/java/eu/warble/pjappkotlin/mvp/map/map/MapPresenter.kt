@@ -7,7 +7,7 @@ import com.indoorway.android.common.sdk.model.IndoorwayPosition
 import com.indoorway.android.location.sdk.IndoorwayLocationSdk
 import com.indoorway.android.location.sdk.model.IndoorwayLocationSdkError
 import com.indoorway.android.location.sdk.model.IndoorwayLocationSdkState
-import com.indoorway.android.map.sdk.listeners.OnObjectSelectedListener
+import com.indoorway.android.map.sdk.listeners.OnRoomSelectedListener
 import eu.warble.pjappkotlin.Application
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.data.StudentDataRepository
@@ -37,7 +37,7 @@ class MapPresenter(
                     view.showLoadingScreen(false)
                     view.showError(R.string.error_map_load_failed)
                 },
-                onObjectSelectedListener = onObjectSelectedListener
+                onRoomSelectedListener = onRoomSelectedListener
         )
     }
 
@@ -63,7 +63,7 @@ class MapPresenter(
                     view.showLoadingScreen(false)
                     view.showError(R.string.error_map_load_failed)
                 },
-                onObjectSelectedListener = onObjectSelectedListener
+                onRoomSelectedListener = onRoomSelectedListener
         )
     }
 
@@ -134,16 +134,16 @@ class MapPresenter(
         }
     }
 
-    private val onObjectSelectedListener = object : OnObjectSelectedListener {
-        override fun canObjectBeSelected(objectParameters: IndoorwayObjectParameters): Boolean {
+    private val onRoomSelectedListener = object : OnRoomSelectedListener {
+        override fun canRoomBeSelected(room: IndoorwayObjectParameters): Boolean {
             // return true if object with given parameters can be selected
-            return "inaccessible" != objectParameters.type
+            return "inaccessible" != room.type
         }
 
-        override fun onObjectSelected(objectParameters: IndoorwayObjectParameters) {
+        override fun onRoomSelected(room: IndoorwayObjectParameters) {
             // called on object selection, check parameters for details
             if (needToFindLocation) {
-                view.startNavigationToObject(objectParameters.id)
+                view.startNavigationToObject(room.id)
             }
         }
 
