@@ -65,10 +65,10 @@
     <string name="logout">Log out</string>
     <string name="language">Language</string>
 
-    <string name="english">English</string>
-    <string name="polish">Polish</string>
-    <string name="ukrainian">Ukrainian</string>
-    <string name="russian">Russian</string>
+    <string name="english" translatable="false">English</string>
+    <string name="polish" translatable="false">Polish</string>
+    <string name="ukrainian" translatable="false">Ukrainian</string>
+    <string name="russian" translatable="false">Russian</string>
     <string name="name">Name</string>
     <string name="number_instalment">Number of an instalment</string>
     <string name="total_number_of_instalments">Total number of instalments</string>
@@ -93,7 +93,7 @@
     <string name="permission_rationale_location_service_message">In order to find your location, the app needs access to the bluetooth and location service.</string>
     <string name="account">Account</string>
     <string name="your_account_info">Your individual account number</string>
-    <string name="pjatk">PJATK</string>
+    <string name="pjatk" translatable="false">PJATK</string>
     <string name="specialization">Specialization</string>
     <string name="no">No</string>
     <string name="download_error">Error while downloading</string>
@@ -130,8 +130,14 @@
     <string name="download_start">Downloading started</string>
     <string name="determining_location">Determining location</string>
     <string name="error_map_load_failed">Map loading failed</string>
-    <string name="pjatk_facebook">PJATK Facebook</string>
-    <string name="pjatk_instagram">PJATK Instagram</string>
-    <string name="mykhi">Mykhi</string>
+    <string name="pjatk_facebook" translatable="false">PJATK Facebook</string>
+    <string name="pjatk_instagram" translatable="false">PJATK Instagram</string>
+    <string name="mykhi" translatable="false">Mykhi</string>
     <string name="news">News</string>
+    <string name="ble_not_supported">BLE not supported</string>
+    <string name="missing_locationm_permission">Please grant location permission</string>
+    <string name="pls_enable_bluetooth">Please enable bluetooth</string>
+    <string name="pls_enable_location_service">Please turn on location service</string>
+    <string name="indoorway_network_error">Network-related error, service will be restarted on network connection established</string>
+    <string name="no_beacons_found">No beacons found</string>
 </resources>

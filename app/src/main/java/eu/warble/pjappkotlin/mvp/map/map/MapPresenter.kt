@@ -1,5 +1,6 @@
 package eu.warble.pjappkotlin.mvp.map.map
 
+import android.content.Context
 import com.indoorway.android.common.sdk.listeners.generic.Action0
 import com.indoorway.android.common.sdk.listeners.generic.Action1
 import com.indoorway.android.common.sdk.model.IndoorwayObjectParameters
@@ -10,11 +11,13 @@ import com.indoorway.android.location.sdk.model.IndoorwayLocationSdkState
 import com.indoorway.android.map.sdk.listeners.OnRoomSelectedListener
 import eu.warble.pjappkotlin.Application
 import eu.warble.pjappkotlin.R
+import eu.warble.pjappkotlin.R.string
 import eu.warble.pjappkotlin.data.StudentDataRepository
 
 class MapPresenter(
-        val view: MapContract.View,
-        val studentDataRepository: StudentDataRepository?
+    val view: MapContract.View,
+    val studentDataRepository: StudentDataRepository?,
+    val appContext: Context
 ) : MapContract.Presenter {
 
     private var needToFindLocation = false
@@ -28,16 +31,16 @@ class MapPresenter(
     override fun loadMap(buildingUUID: String, mapUUID: String, mapName: String) {
         view.showLoadingScreen(true)
         view.loadMap(
-                buildingUUID,
-                mapUUID,
-                onMapLoadCompletedListener = Action1 {
-                    view.showLoadingScreen(false)
-                },
-                onMapLoadFailedListener = Action0 {
-                    view.showLoadingScreen(false)
-                    view.showError(R.string.error_map_load_failed)
-                },
-                onRoomSelectedListener = onRoomSelectedListener
+            buildingUUID,
+            mapUUID,
+            onMapLoadCompletedListener = Action1 {
+                view.showLoadingScreen(false)
+            },
+            onMapLoadFailedListener = Action0 {
+                view.showLoadingScreen(false)
+                view.showError(R.string.error_map_load_failed)
+            },
+            onRoomSelectedListener = onRoomSelectedListener
         )
     }
 
@@ -54,16 +57,16 @@ class MapPresenter(
         view.showDeterminingLocationScreen(false)
         view.showLoadingScreen(true)
         view.loadMap(
-                position.buildingUuid,
-                position.mapUuid,
-                onMapLoadCompletedListener = Action1 {
-                    view.showLoadingScreen(false)
-                },
-                onMapLoadFailedListener = Action0 {
-                    view.showLoadingScreen(false)
-                    view.showError(R.string.error_map_load_failed)
-                },
-                onRoomSelectedListener = onRoomSelectedListener
+            position.buildingUuid,
+            position.mapUuid,
+            onMapLoadCompletedListener = Action1 {
+                view.showLoadingScreen(false)
+            },
+            onMapLoadFailedListener = Action0 {
+                view.showLoadingScreen(false)
+                view.showError(R.string.error_map_load_failed)
+            },
+            onRoomSelectedListener = onRoomSelectedListener
         )
     }
 
@@ -86,7 +89,7 @@ class MapPresenter(
     }
 
     private fun didFlourChanged(
-            currentPosition: IndoorwayPosition?
+        currentPosition: IndoorwayPosition?
     ): Boolean {
         var result = false
         val lastPosition = this.lastPosition
@@ -110,26 +113,33 @@ class MapPresenter(
     private val stateErrorListener = Action1<IndoorwayLocationSdkError> {
         when (it) {
             IndoorwayLocationSdkError.BleNotSupported -> {
-                view.showError("BLE not supported")
+                view.showError(appContext.getString(string.ble_not_supported))
             }
             is IndoorwayLocationSdkError.MissingPermission -> {
-                view.showError("MissingPermissions")
+                view.showError(appContext.getString(string.missing_locationm_permission))
             }
             IndoorwayLocationSdkError.BluetoothDisabled -> {
-                view.showMessageWithAction("Pls enable bluetooth", "Retry") {
+                view.showMessageWithAction(
+                    appContext.getString(string.pls_enable_bluetooth),
+                    appContext.getString(R.string.retry)
+                ) {
                     findLocationAndLoadMap()
                 }
             }
             IndoorwayLocationSdkError.LocationDisabled -> {
-                view.showMessageWithAction("Pls enable location service", "Retry") {
+                view.showMessageWithAction(
+                    appContext.getString(string.pls_enable_location_service),
+                    appContext.getString(R.string.retry)) {
                     findLocationAndLoadMap()
                 }
             }
             IndoorwayLocationSdkError.UnableToFetchData -> {
-                view.showError("Network-related error, service will be restarted on network connection established")
+                view.showError(
+                    appContext.getString(string.indoorway_network_error)
+                )
             }
             IndoorwayLocationSdkError.NoRadioMaps -> {
-                view.showError("No radio maps found")
+                view.showError(appContext.getString(string.no_beacons_found))
             }
         }
     }

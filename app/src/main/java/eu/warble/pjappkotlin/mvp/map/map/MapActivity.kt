@@ -55,11 +55,12 @@ class MapActivity : BaseActivity(), MapContract.View {
         }
     }
 
-    override fun loadMap(buildingUUID: String,
-                         mapUUID: String,
-                         onMapLoadCompletedListener: Action1<IndoorwayMap>,
-                         onMapLoadFailedListener: Action0,
-                         onRoomSelectedListener: OnRoomSelectedListener
+    override fun loadMap(
+        buildingUUID: String,
+        mapUUID: String,
+        onMapLoadCompletedListener: Action1<IndoorwayMap>,
+        onMapLoadFailedListener: Action0,
+        onRoomSelectedListener: OnRoomSelectedListener
     ) {
         mapView.onMapLoadCompletedListener = onMapLoadCompletedListener
         mapView.onMapLoadFailedListener = onMapLoadFailedListener
@@ -68,9 +69,9 @@ class MapActivity : BaseActivity(), MapContract.View {
     }
 
     @NeedsPermission(
-            Manifest.permission.BLUETOOTH_ADMIN,
-            Manifest.permission.BLUETOOTH,
-            Manifest.permission.ACCESS_FINE_LOCATION
+        Manifest.permission.BLUETOOTH_ADMIN,
+        Manifest.permission.BLUETOOTH,
+        Manifest.permission.ACCESS_FINE_LOCATION
     )
     override fun findLocation() {
         presenter.findLocationAndLoadMap()
@@ -99,31 +100,36 @@ class MapActivity : BaseActivity(), MapContract.View {
     }
 
     @OnShowRationale(
-            Manifest.permission.BLUETOOTH_ADMIN,
-            Manifest.permission.BLUETOOTH,
-            Manifest.permission.ACCESS_FINE_LOCATION
+        Manifest.permission.BLUETOOTH_ADMIN,
+        Manifest.permission.BLUETOOTH,
+        Manifest.permission.ACCESS_FINE_LOCATION
     )
     fun showRationaleForPerms(request: PermissionRequest) {
         AlertDialog.Builder(this)
-                .setMessage(R.string.permission_rationale_location_service_message)
-                .setPositiveButton(R.string.button_allow, { _, _ -> request.proceed() })
-                .setNegativeButton(R.string.button_deny, { _, _ -> request.cancel() })
-                .setCancelable(false)
-                .show()
+            .setMessage(R.string.permission_rationale_location_service_message)
+            .setPositiveButton(R.string.button_allow, { _, _ -> request.proceed() })
+            .setNegativeButton(R.string.button_deny, { _, _ -> request.cancel() })
+            .setCancelable(false)
+            .show()
     }
 
-    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+    @OnPermissionDenied(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
+    )
     fun showDeniedForStorage() {
         AlertDialog.Builder(this)
-                .setMessage(R.string.permissions_declined)
-                .setPositiveButton(R.string.ok, { _, _ -> applicationNavigator.goBack() })
-                .setCancelable(false)
-                .show()
+            .setMessage(R.string.permissions_declined)
+            .setPositiveButton(R.string.ok, { _, _ -> applicationNavigator.goBack() })
+            .setCancelable(false)
+            .show()
     }
 
-
     @SuppressLint("NeedOnRequestPermissionsResult")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
     }
@@ -142,8 +148,9 @@ class MapActivity : BaseActivity(), MapContract.View {
 
     private fun initPresenter() {
         presenter = MapPresenter(
-                this,
-                Injection.provideStudentDataRepository(applicationContext)
+            this,
+            Injection.provideStudentDataRepository(applicationContext),
+            applicationContext
         )
     }
 }
