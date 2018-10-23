@@ -118,4 +118,10 @@
     <string name="determining_location">Визначення місцезнаходження</string>
     <string name="error_map_load_failed">Не вдалося завантажити карту</string>
     <string name="news">Новини</string>
+    <string name="ble_not_supported">BLE не підтримується</string>
+    <string name="missing_locationm_permission">Будь ласка, дайте дозвіл на місцезнаходження</string>
+    <string name="pls_enable_bluetooth">Будь ласка, увімкніть bluetooth</string>
+    <string name="pls_enable_location_service">Увімкніть сервіс визначення місцезнаходження</string>
+    <string name="indoorway_network_error">Помилка, пов\'язана з мережею, служба буде перезапущена після встановленим мережевого з\'єднання</string>
+    <string name="no_beacons_found">Маяків (біконів) не знайдено</string>
 </resources>

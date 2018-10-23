@@ -43,10 +43,10 @@ dependencies {
     implementation 'com.github.Warble98:Getter:0.1.7'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
     implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'
-    implementation 'com.indoorway.android:common:2.0.27'
-    implementation 'com.indoorway.android:map:2.0.25'
-    implementation 'com.indoorway.android:location:2.0.25'
-    implementation 'com.indoorway.android:fragments:2.0.25'
+    implementation 'com.indoorway.android:common:2.0.28'
+    implementation 'com.indoorway.android:map:2.0.28'
+    implementation 'com.indoorway.android:location:2.0.28'
+    implementation 'com.indoorway.android:fragments:2.0.28'
 
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
 }

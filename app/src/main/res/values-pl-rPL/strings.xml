@@ -117,4 +117,10 @@
     <string name="error_map_load_failed">Ładowanie mapy nie powiodło się</string>
     <string name="news">Wiadomości</string>
     <string name="fees">Opłaty</string>
+    <string name="ble_not_supported">BLE nie jest wspierany</string>
+    <string name="missing_locationm_permission">Proszę wyrazić zgodę na dostęp do lokalizacji</string>
+    <string name="pls_enable_bluetooth">Włącz bluetooth</string>
+    <string name="pls_enable_location_service">Włącz usługę lokalizacyjną</string>
+    <string name="indoorway_network_error">Błąd związany z siecią, usługa zostanie uruchomiona ponownie po nawiązaniu połączenia sieciowego</string>
+    <string name="no_beacons_found">Nie znaleziono sygnałów nawigacyjnych</string>
 </resources>
