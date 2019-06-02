@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">PJATK Beta</string>
+    <string name="app_name" translatable="false">PJATK</string>
     <string name="app_ver">App version</string>
     <string name="student">Student</string>
     <string name="schedule">Schedule</string>
