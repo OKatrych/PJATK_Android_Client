@@ -153,4 +153,18 @@
             android:layout_gravity="center" />
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/privacy_policy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/privacy_policy_message"
+        android:textAlignment="center"
+        android:textColor="@color/primaryText"
+        app:layout_constraintEnd_toEndOf="@+id/loginGuestBtn"
+        app:layout_constraintStart_toStartOf="@+id/loginGuestBtn"
+        app:layout_constraintTop_toBottomOf="@+id/loginGuestBtn" />
+
 </android.support.constraint.ConstraintLayout>

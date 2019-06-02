@@ -93,17 +93,15 @@ class FtpListAdapter(
         private val icon: ImageView = itemView.file_image
 
         fun bind(file: GetterFile, onItemClick: (GetterFile) -> Unit) {
-            with(itemView) {
-                if (file.isDirectory()) {
-                    icon.setImageResource(R.drawable.folder)
-                } else {
-                    icon.setImageResource(getFileIcon(file.name))
-                }
-                fileName.text = file.name
-                date.text = file.lsEntry.attrs.mtimeString
-                itemView.setOnClickListener {
-                    onItemClick(file)
-                }
+            if (file.isDirectory()) {
+                icon.setImageResource(R.drawable.folder)
+            } else {
+                icon.setImageResource(getFileIcon(file.name))
+            }
+            fileName.text = file.name
+            date.text = file.time()
+            itemView.setOnClickListener {
+                onItemClick(file)
             }
         }
     }

@@ -43,11 +43,11 @@ class StudentAboutFragment : BaseFragment(), StudentAboutContract.View {
     }
 
     override fun setStudentName(studentName: String?) {
-        student_name.text = studentName
+        student_name?.text = studentName
     }
 
     override fun setStudies(studies: String?) {
-        this.studies.text = studies
+        this.studies?.text = studies
     }
 
     override fun setYear(year: String?) {
@@ -55,23 +55,23 @@ class StudentAboutFragment : BaseFragment(), StudentAboutContract.View {
     }
 
     override fun setSemester(semester: String?) {
-        this.semester_counter.text = semester
+        this.semester_counter?.text = semester
     }
 
     override fun setGroups(groups: String?) {
-        this.groups.text = groups
+        this.groups?.text = groups
     }
 
     override fun setStatus(status: String?) {
-        this.status.text = status
+        this.status?.text = status
     }
 
     override fun setAvgMark(avgMark: Float?) {
-        this.ratingBar.rating = avgMark ?: 0f
+        this.ratingBar?.rating = avgMark ?: 0f
     }
 
     override fun setSpecialization(specialization: String?) {
-        this.specialization.text =
+        this.specialization?.text =
                 if (specialization != null && specialization.isNotEmpty())
                     specialization
                 else

@@ -34,6 +34,9 @@ object Constants {
     val PJATK_INSTAGRAM_SITE = "https://instagram.com/polskojaponska"
     val PJATK_MYKHI_SITE = "https://pja.mykhi.org"
 
+    val PRIVACY_POLICY_URL =
+        "http://sum.pjwstk.edu.pl/docs/Polityka-prywatno%C5%9Bci-aplikacji-mobilnej.pdf"
+
     object ListActivityAdapterType {
         val PAYMENT = "PAYMENT"
         val RECEIVABLE = "RECEIVABLE"

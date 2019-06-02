@@ -140,4 +140,6 @@
     <string name="pls_enable_location_service">Please turn on location service</string>
     <string name="indoorway_network_error">Network-related error, service will be restarted on network connection established</string>
     <string name="no_beacons_found">No beacons found</string>
+
+    <string name="privacy_policy_message">By clicking \"LOGIN\" you agree to our &lt;b>privacy policy&lt;/b></string>
 </resources>

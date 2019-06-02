@@ -2,18 +2,15 @@ package eu.warble.pjappkotlin.mvp.login
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import eu.warble.pjappkotlin.R
 import eu.warble.pjappkotlin.mvp.ApplicationNavigator
 import eu.warble.pjappkotlin.mvp.BaseActivity
-import kotlinx.android.synthetic.main.activity_login.loading_screen
-import kotlinx.android.synthetic.main.activity_login.login
-import kotlinx.android.synthetic.main.activity_login.loginBtn
-import kotlinx.android.synthetic.main.activity_login.loginGuestBtn
-import kotlinx.android.synthetic.main.activity_login.password
-import kotlinx.android.synthetic.main.activity_login.pja_logo
+import kotlinx.android.synthetic.main.activity_login.*
+import android.content.Intent
+import android.net.Uri
+import eu.warble.pjappkotlin.utils.Constants
+import eu.warble.pjappkotlin.utils.Tools
+
 
 class LoginActivity : BaseActivity(), LoginContract.View {
 
@@ -25,8 +22,8 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         setTheme(R.style.AppThemeWithoutActionBar)
         setContentView(R.layout.activity_login)
         presenter = LoginPresenter(
-                this,
-                applicationContext
+            this,
+            applicationContext
         )
         initViews()
     }
@@ -41,6 +38,19 @@ class LoginActivity : BaseActivity(), LoginContract.View {
                 applicationNavigator.goToMainActivityWithGuestMode()
             else
                 showError(R.string.connect_error)
+        }
+
+        val privacyPolicyText = privacy_policy
+        privacyPolicyText.text = Tools.fromHtml(getString(R.string.privacy_policy_message))
+        privacyPolicyText.setOnClickListener {
+            openPrivacyPolicyPage()
+        }
+    }
+
+    private fun openPrivacyPolicyPage() {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.PRIVACY_POLICY_URL))
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
         }
     }
 
