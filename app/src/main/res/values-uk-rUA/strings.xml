@@ -124,4 +124,5 @@
     <string name="indoorway_network_error">Помилка, пов\'язана з мережею, служба буде перезапущена після встановленим мережевого з\'єднання</string>
     <string name="no_beacons_found">Маяків (біконів) не знайдено</string>
     <string name="privacy_policy_message">Натискаючи "Увійти" погоджуєшся на &lt;b>політику приватності&lt;/b></string>
+    <string name="sum_greeting">Привіт, прихильникy темної сторони Сили, я залишив тобі кілька чудових посилань</string>
 </resources>

@@ -142,4 +142,8 @@
     <string name="no_beacons_found">No beacons found</string>
 
     <string name="privacy_policy_message">By clicking \"LOGIN\" you agree to our &lt;b>privacy policy&lt;/b></string>
+    <string name="sum_greeting">Hello, a supporter of the dark side of the Force, I left you a few great links</string>
+    <string name="slack">Slack</string>
+    <string name="sharepoint">SharePoint</string>
+    <string name="s9_room">S9 Room</string>
 </resources>

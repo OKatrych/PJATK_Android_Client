@@ -48,10 +48,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     }
 
     private fun openPrivacyPolicyPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.PRIVACY_POLICY_URL))
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
+        applicationNavigator.openWebPage(Constants.PRIVACY_POLICY_URL)
     }
 
     override fun onResume() {

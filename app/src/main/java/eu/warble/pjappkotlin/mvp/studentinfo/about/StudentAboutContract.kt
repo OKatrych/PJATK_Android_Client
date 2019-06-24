@@ -23,6 +23,8 @@ interface StudentAboutContract {
 
         fun setSpecialization(specialization: String?)
 
+        fun showHiddenSUMCard()
+
     }
 
     interface Presenter : BasePresenter {

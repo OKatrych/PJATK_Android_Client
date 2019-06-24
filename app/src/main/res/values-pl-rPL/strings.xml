@@ -124,4 +124,5 @@
     <string name="indoorway_network_error">Błąd związany z siecią, usługa zostanie uruchomiona ponownie po nawiązaniu połączenia sieciowego</string>
     <string name="no_beacons_found">Nie znaleziono sygnałów nawigacyjnych</string>
     <string name="privacy_policy_message">Clikając \"Zaloguj się\" zgadzasz się na &lt;b>politykę prywatności&lt;/b></string>
+    <string name="sum_greeting">Witaj, zwolenniku ciemnej strony Mocy, zostawiłem ci kilka świetnych linków</string>
 </resources>

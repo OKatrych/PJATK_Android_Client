@@ -1,230 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:background="@color/secondaryBackground">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/secondaryBackground"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            card_view:cardCornerRadius="4dp">
+        <include layout="@layout/card_about" />
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:id="@+id/student_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:text="Jan Kowalski"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/primaryText"
-                    android:textSize="24sp"
-                    card_view:layout_constraintHorizontal_bias="0.0"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="24dp" />
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rating="3.5"
-                    android:stepSize="0.5"
-                    android:numStars="5"
-                    style="@style/RatingBarStyle"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/student_name"
-                    android:layout_marginLeft="16dp"
-                    card_view:layout_constraintLeft_toLeftOf="parent" />
-
-                <TextView
-                    android:id="@+id/avg_point_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/average_point"
-                    card_view:layout_constraintLeft_toRightOf="@+id/ratingBar"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/student_name"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginRight="16dp"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    card_view:layout_constraintHorizontal_bias="0.0" />
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="?android:listDivider"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@+id/avg_point_text"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/studies"
-                    android:textStyle="bold"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@+id/divider" />
-
-                <TextView
-                    android:id="@+id/studies"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Information Technology"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    card_view:layout_constraintStart_toEndOf="@+id/textView"
-                    card_view:layout_constraintTop_toBottomOf="@+id/divider" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="@string/year"
-                    android:textStyle="bold"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/studies" />
-
-                <TextView
-                    android:id="@+id/year_counter"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="2"
-                    card_view:layout_constraintTop_toBottomOf="@+id/studies"
-                    android:layout_marginLeft="0dp"
-                    card_view:layout_constraintLeft_toLeftOf="@+id/studies"
-                    android:layout_marginRight="16dp"
-                    card_view:layout_constraintRight_toRightOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="@string/semester"
-                    android:textStyle="bold"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/year_counter" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="@string/groups"
-                    android:textStyle="bold"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/semester_counter" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/status"
-                    android:textStyle="bold"
-                    card_view:layout_constraintLeft_toLeftOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@+id/groups" />
-
-                <TextView
-                    android:id="@+id/semester_counter"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="4"
-                    card_view:layout_constraintHorizontal_bias="0.0"
-                    card_view:layout_constraintLeft_toLeftOf="@+id/year_counter"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@+id/year_counter" />
-
-                <TextView
-                    android:id="@+id/groups"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="WIs I.4 - 118l, WIs I.4 - 16c, WIs I.4 - 1w, WIs I.4 OB.APBD 16c, WIs I.4 OB.APBD 1w, WIs I.4 OB.PSM 18c, WIs I.4 OB.PSM 1w, WIs I.4 OB.TPO 16c, WIs"
-                    card_view:layout_constraintHorizontal_bias="0.0"
-                    card_view:layout_constraintLeft_toLeftOf="@+id/semester_counter"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@+id/semester_counter" />
-
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Student"
-                    android:layout_marginRight="16dp"
-                    card_view:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginLeft="0dp"
-                    card_view:layout_constraintLeft_toLeftOf="@+id/groups"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/groups" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/specialization"
-                    android:textStyle="bold"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@+id/status" />
-
-                <TextView
-                    android:id="@+id/specialization"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="null"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    card_view:layout_constraintStart_toStartOf="@+id/status"
-                    card_view:layout_constraintTop_toBottomOf="@+id/status" />
-
-            </android.support.constraint.ConstraintLayout>
-
-        </android.support.v7.widget.CardView>
+        <include
+            android:id="@+id/card_specialization_sum"
+            layout="@layout/card_specialization_sum"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
     </LinearLayout>
 </ScrollView>

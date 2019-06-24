@@ -2,21 +2,24 @@ package eu.warble.pjappkotlin.mvp.studentinfo.about
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 import eu.warble.pjappkotlin.R
+import eu.warble.pjappkotlin.mvp.BaseActivity
 import eu.warble.pjappkotlin.mvp.BaseFragment
+import eu.warble.pjappkotlin.mvp.main.MainActivity
+import eu.warble.pjappkotlin.utils.Constants
 import eu.warble.pjappkotlin.utils.Injection
-import kotlinx.android.synthetic.main.fragment_student_about.groups
-import kotlinx.android.synthetic.main.fragment_student_about.ratingBar
-import kotlinx.android.synthetic.main.fragment_student_about.semester_counter
-import kotlinx.android.synthetic.main.fragment_student_about.specialization
-import kotlinx.android.synthetic.main.fragment_student_about.status
-import kotlinx.android.synthetic.main.fragment_student_about.student_name
-import kotlinx.android.synthetic.main.fragment_student_about.studies
-import kotlinx.android.synthetic.main.fragment_student_about.year_counter
+import kotlinx.android.synthetic.main.card_about.*
+import kotlinx.android.synthetic.main.card_about.specialization
+import kotlinx.android.synthetic.main.card_specialization_sum.*
+import kotlinx.android.synthetic.main.fragment_student_about.*
 
+const val PALPATINE_GIF_DURATION = 4500L
 
 class StudentAboutFragment : BaseFragment(), StudentAboutContract.View {
 
@@ -76,6 +79,41 @@ class StudentAboutFragment : BaseFragment(), StudentAboutContract.View {
                     specialization
                 else
                     getString(R.string.no)
+    }
+
+    override fun showHiddenSUMCard() {
+        val hiddenImage = hidden_palpatine_image
+
+        card_specialization_sum.visibility = View.VISIBLE
+
+        btn_s9_room.setOnClickListener { openURL(Constants.SUM_S9_URL) }
+        btn_sharepoint.setOnClickListener { openURL(Constants.SUM_SHAREPOINT_URL) }
+        btn_slack.setOnClickListener { openURL(Constants.SUM_SLACK_URL) }
+
+        //show easter egg of Palpatine
+
+        var isGifShowing = false
+        empire_logo.setOnLongClickListener {
+            if (!isGifShowing) {
+                isGifShowing = true
+                hiddenImage.visibility = View.VISIBLE
+                Glide.with(this)
+                        .load(R.raw.palpatine)
+                        .signature(ObjectKey("${System.currentTimeMillis()}"))
+                        .into(hiddenImage)
+
+                //Hide image after gif finished
+                Handler().postDelayed({
+                    isGifShowing = false
+                    hiddenImage.visibility = View.GONE
+                }, PALPATINE_GIF_DURATION)
+            }
+            return@setOnLongClickListener true
+        }
+    }
+
+    private fun openURL(url: String) {
+        (activity as? MainActivity)?.applicationNavigator?.openWebPage(url)
     }
 
     companion object {
